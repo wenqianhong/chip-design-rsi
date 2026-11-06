@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Independent module acceptance in Linux; no model or benchmark optimization."""
-import hashlib,json,os,re,shutil,subprocess,time
+import json,subprocess,time
 from pathlib import Path
 root=Path('/home/wenqianhong.guest/chipbench-modules')
 out=root/'results';out.mkdir(exist_ok=True)
@@ -46,3 +46,4 @@ check('netlist-compile',['iverilog','-g2012','-o',str(out/'netlist.vvp'),str(out
 check('netlist-simulation',['vvp',str(out/'netlist.vvp')],fixtures,contains='COUNTER_PASS checks=3')
 check('pico-synthesis',['make','synth.v'],pico,timeout=600)
 check('pico-gate-simulation',['make','test_synth',*flags],pico,timeout=600,contains='ALL TESTS PASSED.')
+raise SystemExit(0 if all(row['status']=='passed' for row in results) else 1)

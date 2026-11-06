@@ -1,0 +1,6 @@
+gcc-riscv64-unknown-elf	13.2.0-11ubuntu1+12
+iverilog	12.0-2build2
+klayout	0.28.16-0ubuntu0.24.04.1
+verilator	5.020-1
+yosys	0.33-5build2
+z3	4.8.12-3.1build1

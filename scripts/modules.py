@@ -8,11 +8,11 @@ GUEST='/home/wenqianhong.guest/chipbench-modules'
 OUT=ROOT/'.chipbench/modules'
 def call(args,**kwargs):return subprocess.run(args,check=True,**kwargs)
 def shell(*args):return call([LIMA,'shell','--workdir=/tmp',VM,*args])
-p=argparse.ArgumentParser();p.add_argument('command',choices=['status','logic','collect']);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('command',choices=['status','logic','drc','collect']);a=p.parse_args()
 OUT.mkdir(parents=True,exist_ok=True)
 if a.command=='status':
  call([LIMA,'list','--json',VM])
- for name in ['logic-results.json','physical-results.json']:
+ for name in ['logic-results.json','physical-results.json','drc-results.json']:
   path=OUT/'results'/name
   if path.exists():print(path.read_text())
 elif a.command=='logic':
@@ -21,6 +21,11 @@ elif a.command=='logic':
   call([LIMA,'copy',str(ROOT/'environments/modules'/name),VM+':'+GUEST+'/fixtures/'+name])
  call([LIMA,'copy',str(ROOT/'environments/modules/run_logic.py'),VM+':'+GUEST+'/run_logic.py'])
  shell('python3',GUEST+'/run_logic.py')
+elif a.command=='drc':
+ call([LIMA,'start',VM,'--tty=false'])
+ for name in ['drc_fixtures.py','run_drc.py']:
+  call([LIMA,'copy',str(ROOT/'environments/modules'/name),VM+':'+GUEST+'/'+name])
+ shell('python3',GUEST+'/run_drc.py')
 else:
  call([LIMA,'copy','-r',VM+':'+GUEST+'/results',str(OUT)])
  print(OUT/'results')

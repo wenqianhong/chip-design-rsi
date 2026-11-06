@@ -1,0 +1,40 @@
+[
+  {
+    "name": "metal_good",
+    "status": "passed",
+    "exit_code": 0,
+    "violations": 0,
+    "categories": [],
+    "command": [
+      "klayout",
+      "-b",
+      "-r",
+      "/home/wenqianhong.guest/chipbench-modules/orfs/flow/platforms/nangate45/drc/FreePDK45.lydrc",
+      "-rd",
+      "in_gds=/home/wenqianhong.guest/chipbench-modules/results/metal_good.gds",
+      "-rd",
+      "report_file=/home/wenqianhong.guest/chipbench-modules/results/metal_good.lyrdb"
+    ],
+    "elapsed_seconds": 0.785
+  },
+  {
+    "name": "metal_bad",
+    "status": "passed",
+    "exit_code": 0,
+    "violations": 1,
+    "categories": [
+      "'METAL1.1'"
+    ],
+    "command": [
+      "klayout",
+      "-b",
+      "-r",
+      "/home/wenqianhong.guest/chipbench-modules/orfs/flow/platforms/nangate45/drc/FreePDK45.lydrc",
+      "-rd",
+      "in_gds=/home/wenqianhong.guest/chipbench-modules/results/metal_bad.gds",
+      "-rd",
+      "report_file=/home/wenqianhong.guest/chipbench-modules/results/metal_bad.lyrdb"
+    ],
+    "elapsed_seconds": 0.749
+  }
+]
