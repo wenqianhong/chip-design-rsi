@@ -1,0 +1,221 @@
+[
+  {
+    "name": "versions",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": null,
+    "elapsed_seconds": 0.122,
+    "command": [
+      "bash",
+      "-c",
+      "iverilog -V; verilator --version; yosys -V; z3 --version; riscv64-unknown-elf-gcc --version; klayout -v"
+    ],
+    "log": "versions.log"
+  },
+  {
+    "name": "pico-iverilog",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "ALL TESTS PASSED.",
+    "elapsed_seconds": 9.108,
+    "command": [
+      "make",
+      "test",
+      "TOOLCHAIN_PREFIX=riscv64-unknown-elf-",
+      "COMPRESSED_ISA=C"
+    ],
+    "log": "pico-iverilog.log"
+  },
+  {
+    "name": "pico-verilator",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "ALL TESTS PASSED.",
+    "elapsed_seconds": 4.228,
+    "command": [
+      "make",
+      "test_verilator",
+      "TOOLCHAIN_PREFIX=riscv64-unknown-elf-",
+      "COMPRESSED_ISA=C"
+    ],
+    "log": "pico-verilator.log"
+  },
+  {
+    "name": "counter-compile",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": null,
+    "elapsed_seconds": 0.004,
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-o",
+      "/home/wenqianhong.guest/chipbench-modules/results/counter.vvp",
+      "counter.sv",
+      "counter_tb.sv"
+    ],
+    "log": "counter-compile.log"
+  },
+  {
+    "name": "counter-simulation",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "COUNTER_PASS checks=3",
+    "elapsed_seconds": 0.003,
+    "command": [
+      "vvp",
+      "/home/wenqianhong.guest/chipbench-modules/results/counter.vvp"
+    ],
+    "log": "counter-simulation.log"
+  },
+  {
+    "name": "wrong-logic-compile",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": null,
+    "elapsed_seconds": 0.004,
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-o",
+      "/home/wenqianhong.guest/chipbench-modules/results/bad.vvp",
+      "counter_bad.sv",
+      "counter_tb.sv"
+    ],
+    "log": "wrong-logic-compile.log"
+  },
+  {
+    "name": "wrong-logic-detected",
+    "status": "passed",
+    "exit_code": 1,
+    "expected_exit": "nonzero",
+    "required_text": "counter wrap mismatch",
+    "elapsed_seconds": 0.004,
+    "command": [
+      "vvp",
+      "/home/wenqianhong.guest/chipbench-modules/results/bad.vvp"
+    ],
+    "log": "wrong-logic-detected.log"
+  },
+  {
+    "name": "syntax-error-detected",
+    "status": "passed",
+    "exit_code": 2,
+    "expected_exit": "nonzero",
+    "required_text": "syntax error",
+    "elapsed_seconds": 0.003,
+    "command": [
+      "iverilog",
+      "-o",
+      "/home/wenqianhong.guest/chipbench-modules/results/syntax.vvp",
+      "syntax_bad.v"
+    ],
+    "log": "syntax-error-detected.log"
+  },
+  {
+    "name": "counter-induction",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "SUCCESS",
+    "elapsed_seconds": 0.034,
+    "command": [
+      "yosys",
+      "-p",
+      "read_verilog -formal -sv counter.sv; prep -top counter; flatten; sat -seq 4 -tempinduct -prove-asserts -verify -dump_vcd /home/wenqianhong.guest/chipbench-modules/results/formal.vcd"
+    ],
+    "log": "counter-induction.log"
+  },
+  {
+    "name": "formal-bug-detected",
+    "status": "passed",
+    "exit_code": 1,
+    "expected_exit": "nonzero",
+    "required_text": "proof did fail",
+    "elapsed_seconds": 0.016,
+    "command": [
+      "yosys",
+      "-p",
+      "read_verilog -formal -sv counter_bad.sv; prep -top counter; flatten; sat -seq 4 -tempinduct -prove-asserts -verify -dump_vcd /home/wenqianhong.guest/chipbench-modules/results/counterexample.vcd"
+    ],
+    "log": "formal-bug-detected.log"
+  },
+  {
+    "name": "counter-synthesis",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "Found and reported 0 problems",
+    "elapsed_seconds": 0.073,
+    "command": [
+      "yosys",
+      "-p",
+      "read_verilog counter.sv; synth -top counter; check -assert; stat; write_verilog -noattr /home/wenqianhong.guest/chipbench-modules/results/counter_netlist.v"
+    ],
+    "log": "counter-synthesis.log"
+  },
+  {
+    "name": "netlist-compile",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": null,
+    "elapsed_seconds": 0.004,
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-o",
+      "/home/wenqianhong.guest/chipbench-modules/results/netlist.vvp",
+      "/home/wenqianhong.guest/chipbench-modules/results/counter_netlist.v",
+      "counter_tb.sv"
+    ],
+    "log": "netlist-compile.log"
+  },
+  {
+    "name": "netlist-simulation",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "COUNTER_PASS checks=3",
+    "elapsed_seconds": 0.004,
+    "command": [
+      "vvp",
+      "/home/wenqianhong.guest/chipbench-modules/results/netlist.vvp"
+    ],
+    "log": "netlist-simulation.log"
+  },
+  {
+    "name": "pico-synthesis",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": null,
+    "elapsed_seconds": 4.034,
+    "command": [
+      "make",
+      "synth.v"
+    ],
+    "log": "pico-synthesis.log"
+  },
+  {
+    "name": "pico-gate-simulation",
+    "status": "passed",
+    "exit_code": 0,
+    "expected_exit": "zero",
+    "required_text": "ALL TESTS PASSED.",
+    "elapsed_seconds": 188.497,
+    "command": [
+      "make",
+      "test_synth",
+      "TOOLCHAIN_PREFIX=riscv64-unknown-elf-",
+      "COMPRESSED_ISA=C"
+    ],
+    "log": "pico-gate-simulation.log"
+  }
+]

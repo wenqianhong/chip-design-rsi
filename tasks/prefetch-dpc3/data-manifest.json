@@ -1,0 +1,116 @@
+{
+  "task": {
+    "id": "prefetch-dpc3",
+    "version": "1",
+    "description": "Optimize L2 ip_stride on fixed DPC3 SPEC CPU trace prefixes. No trace-name special cases, external I/O, or modifications outside the two prefetcher files. Keep tracker capacity unchanged.",
+    "allowed_files": [
+      "ip_stride.cc",
+      "ip_stride.h"
+    ],
+    "max_submissions": 3,
+    "warmup_instructions": 1000000,
+    "simulation_instructions": 2000000,
+    "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+    "data_kind": "dpc3-spec-prefix",
+    "evaluation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+    "traces": {
+      "development": [
+        "429.mcf-184B",
+        "433.milc-127B",
+        "462.libquantum-1343B"
+      ],
+      "validation": [
+        "470.lbm-1274B"
+      ]
+    },
+    "repeats": 3,
+    "source": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/",
+    "prefix_records": 3100000
+  },
+  "traces": [
+    {
+      "name": "429.mcf-184B",
+      "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/429.mcf-184B.champsimtrace.xz",
+      "source_headers": {
+        "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+        "Server": "Apache/2.4.52 (Ubuntu)",
+        "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+        "ETag": "\"4c084310-5e87b7c162200\"",
+        "Accept-Ranges": "bytes",
+        "Content-Length": "67108864",
+        "Content-Range": "bytes 0-67108863/1275609872",
+        "Connection": "close",
+        "Content-Type": "application/x-xz"
+      },
+      "downloaded_bytes": 2097152,
+      "downloaded_prefix_sha256": "dadc10ce925d047da8682aca809b15ac6be2893c9f7a44ebd7cd30b621ef6e84",
+      "record_count": 3100000,
+      "raw_prefix_sha256": "bd4b8b953030e8fb7f7fe5f71fd157142bf7e9c3932c18418bf1a4cdc3ad131e",
+      "sha256": "fb11b4504598bdca25294fa7aba51e1eb4f38ad454d90ec55f59c7b070fdd8c7",
+      "cached_bytes": 2332548
+    },
+    {
+      "name": "433.milc-127B",
+      "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/433.milc-127B.champsimtrace.xz",
+      "source_headers": {
+        "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+        "Server": "Apache/2.4.52 (Ubuntu)",
+        "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+        "ETag": "\"1f5a0124-5e87b7c162200\"",
+        "Accept-Ranges": "bytes",
+        "Content-Length": "67108864",
+        "Content-Range": "bytes 0-67108863/525992228",
+        "Connection": "close",
+        "Content-Type": "application/x-xz"
+      },
+      "downloaded_bytes": 1048576,
+      "downloaded_prefix_sha256": "0ee97f7605f71fd0a2d10535510382f3a0cd512e9defd11209f3e658fdff8574",
+      "record_count": 3100000,
+      "raw_prefix_sha256": "06139bd4132773e631034a8b3b80e0b2475be9d1fc6058f1b969fe55434cefc5",
+      "sha256": "65997f84c37ff535bb071b5cbcee44513d7dde196492ccb259a67bd25c7f1190",
+      "cached_bytes": 957640
+    },
+    {
+      "name": "462.libquantum-1343B",
+      "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/462.libquantum-1343B.champsimtrace.xz",
+      "source_headers": {
+        "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+        "Server": "Apache/2.4.52 (Ubuntu)",
+        "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+        "ETag": "\"f05d7ec-5e87c527bff40\"",
+        "Accept-Ranges": "bytes",
+        "Content-Length": "67108864",
+        "Content-Range": "bytes 0-67108863/252041196",
+        "Connection": "close",
+        "Content-Type": "application/x-xz"
+      },
+      "downloaded_bytes": 1048576,
+      "downloaded_prefix_sha256": "2ddd2daac7c7b790ca98ef78395423b4bd52988e339a0486bc54292f74374995",
+      "record_count": 3100000,
+      "raw_prefix_sha256": "e134537c05af9989f8e3317fa0b34176e2bfc14a73d93b025e5f98e42a6dd29b",
+      "sha256": "335a20ad0f8665eb405fad89f9fc8206b423eee50260a8d69535f14be24bef64",
+      "cached_bytes": 363744
+    },
+    {
+      "name": "470.lbm-1274B",
+      "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/470.lbm-1274B.champsimtrace.xz",
+      "source_headers": {
+        "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+        "Server": "Apache/2.4.52 (Ubuntu)",
+        "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+        "ETag": "\"295a98c4-5e87c527bff40\"",
+        "Accept-Ranges": "bytes",
+        "Content-Length": "67108864",
+        "Content-Range": "bytes 0-67108863/693803204",
+        "Connection": "close",
+        "Content-Type": "application/x-xz"
+      },
+      "downloaded_bytes": 1048576,
+      "downloaded_prefix_sha256": "f8a358839998e4779fbf7dea25b180fc384f2d5747ba3fdec41a4f2fa489e43e",
+      "record_count": 3100000,
+      "raw_prefix_sha256": "a43e3a3bfc296495f9403d1e488e91b0559ff518bfff570a01292d0caae56f2f",
+      "sha256": "8a09614fa8101f11215757990ae535c686cdd09407df67a2dd45015a07dd250a",
+      "cached_bytes": 1171052
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+.tools/
+.chipbench/
+runs/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.chipbench-base.json
+integrations/local/
+.codex/config.toml
+.mcp.json

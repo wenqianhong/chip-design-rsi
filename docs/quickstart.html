@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chipbench · 本地使用说明</title><style>
+body{max-width:1050px;margin:35px auto;padding:0 22px 50px;background:#f5f5ef;color:#193b34;font:15px/1.75 system-ui,-apple-system,'PingFang SC',sans-serif}header{background:#193b34;color:white;padding:30px;border-radius:20px}h1{font-size:36px;line-height:1.3}h2{margin-top:35px}h3{margin:5px 0}p{margin:8px 0}a{color:#28765d}header a{color:#d6f18b}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.card,details{background:white;border:1px solid #dce2d9;border-radius:13px;padding:18px}.card p,small{font-size:13px;color:#63716b}pre{background:#1d342f;color:#e4eedf;padding:20px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.7 ui-monospace,monospace}.note{background:#edf2e4;padding:16px;border-left:3px solid #176b51;margin:15px 0}table{width:100%;border-collapse:collapse;font-size:13px;background:white}td,th{padding:12px;text-align:left;border-bottom:1px solid #dce2d9}summary{cursor:pointer}code{overflow-wrap:anywhere}.table{overflow:auto}@media(max-width:700px){.cards{grid-template-columns:1fr}h1{font-size:28px}}
+</style></head><body>
+<header><small style="color:#d6f18b">CHIP DESIGN RSI · v0.1 · LOCAL EXECUTION</small><h1>把芯片实验工具<br>接到你常用的 Agent。</h1><p>Mac + Lima / VZ + ARM Linux。无需 Docker；同一个 CLI / MCP 服务。</p><a href="v0.1-plan.html">开发计划</a> · <a href="initial-roadmap.html">原始路线图</a></header>
+<div class="note"><b>当前边界：</b>有两种任务：prefetch-smoke 验证工具闭环；prefetch-dpc3 使用真实程序 trace 的固定短窗口。后者最多 3 个开发候选 + 1 次冻结验证，不代表完整 SPEC 成绩。</div>
+<div class="cards"><div class="card"><h3>实验工具</h3><p>任务发现、创建工作区、异步提交、日志查询、取消和最终验证。</p></div><div class="card"><h3>执行隔离</h3><p>每次运行克隆一个停止状态的准备好磁盘，创建独立 VM。任务以普通用户在无外部网卡的网络命名空间运行。</p></div><div class="card"><h3>结果证据</h3><p>记录源文件、补丁、版本、trace hash、原始 JSON、日志和 HTML 报告。</p></div></div>
+<h2>01 · 本机直接试一次</h2><p>在项目根目录打开终端。所有命令默认输出结构化 JSON；下面的 ID 用返回值替换。</p>
+<pre>./scripts/chipbench doctor
+./scripts/chipbench tasks
+./scripts/chipbench reset
+
+# 编辑 reset 返回的工作区里的 ip_stride.cc / ip_stride.h
+./scripts/chipbench run w-返回的工作区ID --request-id my-experiment-1
+./scripts/chipbench inspect r-返回的运行ID
+
+# completed 后，冻结这次提交，在另一组公开合成 trace 上验证
+./scripts/chipbench evaluate r-返回的运行ID --request-id my-final-1</pre>
+<p>run 可用 --timeout-seconds 设置 1–3600 秒总预算（包含排队与启动）。run / evaluate 立即返回；用 inspect 查看进度。返回状态 completed 表示实验有效完成，不保证候选比基线快。HTML 路径位于 artifacts.report。</p>
+<pre># 分页查看日志；offset 使用上次的 next_offset
+./scripts/chipbench inspect r-运行ID --offset 12000 --limit 12000
+./scripts/chipbench cancel r-运行ID
+
+# Mac 重启或 Runner 意外退出后，清理已失联任务自己的 VM
+./scripts/chipbench recover</pre>
+<h2>02 · 只接你的 Codex CLI</h2><p>使用现有 ChatGPT 登录，不新增 API key。项目的 .codex/config.toml 提供 chipbench MCP；这次自动实验由本地控制器调用 codex exec 生成代码，控制器独立提交和评分。</p><p>Claude / DeepSeek Harness 暂缓。旧配置示例保留，不属于当前验收范围。</p><p><a href="benchmark.html">查看真实 benchmark 的输入、预算和结果</a></p><h2>03 · 在另一台 ARM Mac 上安装</h2><p>需要 macOS 的 VZ 支持、Python 3.10+、网络和至少 8 GiB 可用空间（建议留 20 GiB 以上）。基础 VM 使用 2 vCPU、4 GiB 内存和 20 GiB 虚拟磁盘。</p>
+<pre>CHIPBENCH_PYTHON=/你的/python3.10/路径 bash scripts/setup-local.sh</pre>
+<p>Lima 2.3.0 安装到项目 .tools，下发的 Ubuntu 镜像有固定 SHA-256。ChampSim 固定提交 410cee62d9c429c043ea611325ce00e6c303be2a；依赖由其固定 vcpkg 子模块安装，实际 guest 软件包清单保存在 .tools/guest-packages.txt。系统 apt 仓库仍可能更新，因此不宣称跨时间逐字节可复现。</p>
+<details><summary>如果 VM 下载源码需要 Mac 的代理</summary><p>设置 CHIPBENCH_BUILD_PROXY 为 VM 可访问的代理地址，再运行安装脚本。Lima 默认网络中宿主地址通常为 192.168.5.2；确认你的代理端口，不要直接把宿主的 127.0.0.1 填给 VM。代理只用于构建依赖，任务运行时使用独立无网络命名空间。</p><pre>CHIPBENCH_BUILD_PROXY=http://192.168.5.2:你的端口 \
+CHIPBENCH_PYTHON=/你的/python3.10/路径 bash scripts/setup-local.sh</pre></details>
+<h2>04 · 这版究竟跑什么</h2><div class="table"><table><tbody>
+<tr><th>仿真范围</th><td>ChampSim 的 CPU 缓存预取器探索；不是 RTL 仿真或芯片物理设计。</td></tr>
+<tr><th>输入</th><td>3 条开发 + 3 条公开验证合成 trace，各 80,000 条记录。每次 warmup 10,000、测量至少 50,000 条指令。</td></tr>
+<tr><th>对照</th><td>no-prefetch 参照运行 1 次；ip_stride 基线和候选各重复 3 次，固定配置与 trace。</td></tr>
+<tr><th>结果</th><td>IPC 比值几何平均、逐 trace IPC、L2 demand MPKI、预取计数、guest 耗时和子进程峰值 RSS；RSS 不是整个 VM 峰值。</td></tr>
+<tr><th>限制</th><td>每工作区最多 3 次开发提交、1 次最终验证；运行串行。只允许两份预取器源文件，每份 ≤128 KiB。</td></tr>
+<tr><th>失败</th><td>编译错误、超时、无效统计、环境错误、取消均返回状态和日志。OOM 目前可能体现为编译或进程错误，尚无精确 OOM 分类验收。</td></tr>
+</tbody></table></div>
+<h2>05 · 文件在哪里</h2><pre>src/chipbench/          CLI、MCP、任务核心、VM worker、结果解析
+environments/          Lima 配置、安装脚本、guest 执行器
+tasks/prefetch-smoke/   固定任务、预取器初始文件与上游许可证
+scripts/               安装、trace 生成、接入配置生成
+integrations/          Agent 操作说明
+.chipbench/runs/        本地运行证据和 report.html（不提交 Git）
+docs/                  原始计划、开发计划、使用说明与验收记录</pre>
+<p>预取器初始源码来自 ChampSim，随附 Apache-2.0 许可证。合成 trace 由本项目脚本生成，不打包 SPEC 等受限程序轨迹。</p>
+<div class="note"><b>隔离边界：</b>VM 内不共享 Mac 目录，不携带模型凭据。Agent 本身仍在 Mac 上运行，其他终端操作不受这台 VM 保护。预取器与模拟器同进程，结果也可能被恶意代码伪造；公开排行榜需要更强评测隔离。</div>
+<p><a href="https://lima-vm.io/docs/config/plain/">Lima plain 模式</a> · <a href="https://learn.chatgpt.com/docs/extend/mcp?surface=cli">Codex MCP</a> · <a href="https://code.claude.com/docs/en/mcp">Claude Code MCP</a></p>
+</body></html>

@@ -1,0 +1,59 @@
+--- a/prefetcher/ip_stride/ip_stride.cc
++++ b/prefetcher/ip_stride/ip_stride.cc
+@@ -7,6 +7,7 @@
+ {
+   champsim::block_number cl_addr{addr};
+   champsim::block_number::difference_type stride = 0;
++  uint8_t confidence = 0;
+ 
+   auto found = table.check_hit({ip, cl_addr, stride});
+ 
+@@ -14,14 +15,25 @@
+   if (found.has_value()) {
+     stride = champsim::offset(found->last_cl_addr, cl_addr);
+ 
+-    // Initialize prefetch state unless we somehow saw the same address twice in
+-    // a row or if this is the first time we've seen this stride
+-    if (stride != 0 && stride == found->last_stride)
+-      active_lookahead = {champsim::address{cl_addr}, stride, PREFETCH_DEGREE};
++    // Multiple accesses within a line are not new stride observations. Preserve
++    // the learned stride and refresh LRU without restarting the lookahead.
++    if (stride == 0) {
++      table.fill(found.value());
++      return metadata_in;
++    }
++
++    if (stride == found->last_stride) {
++      confidence = found->confidence < 3 ? found->confidence + 1 : 3;
++      // Give stable streams more lead time only when there is MSHR headroom.
++      const int degree = confidence == 3 && intern_->get_mshr_occupancy_ratio() < 0.5
++                             ? CONFIDENT_PREFETCH_DEGREE
++                             : PREFETCH_DEGREE;
++      active_lookahead = {champsim::address{cl_addr}, stride, degree};
++    }
+   }
+ 
+   // update tracking set
+-  table.fill({ip, cl_addr, stride});
++  table.fill({ip, cl_addr, stride, confidence});
+ 
+   return metadata_in;
+ }
+--- a/prefetcher/ip_stride/ip_stride.h
++++ b/prefetcher/ip_stride/ip_stride.h
+@@ -14,6 +14,7 @@
+     champsim::address ip{};                                // the IP we're tracking
+     champsim::block_number last_cl_addr{};                 // the last address accessed by this IP
+     champsim::block_number::difference_type last_stride{}; // the stride between the last two addresses accessed by this IP
++    uint8_t confidence = 0; // consecutive confirmations of the nonzero stride, capped at 3
+ 
+     auto index() const
+     {
+@@ -36,6 +37,7 @@
+   constexpr static std::size_t TRACKER_SETS = 256;
+   constexpr static std::size_t TRACKER_WAYS = 4;
+   constexpr static int PREFETCH_DEGREE = 3;
++  constexpr static int CONFIDENT_PREFETCH_DEGREE = 5;
+ 
+   std::optional<lookahead_entry> active_lookahead;
+ 

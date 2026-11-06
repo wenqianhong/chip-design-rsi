@@ -1,0 +1,5 @@
+Edited only `ip_stride.cc` and `ip_stride.h`.
+
+Retained candidate 2’s confidence-based depth and duplicate suppression. Added an originating-IP field so a stride change cancels that IP’s unfinished lookahead, reducing potential stale prefetch pollution.
+
+Tracker remains 256 sets × 4 ways; added state is one address. No compilation or measurements run; candidate 3’s performance is unverified.

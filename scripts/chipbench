@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+TASK_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+if [ ! -x "$TASK_ROOT/.venv/bin/chipbench" ]; then
+  echo 'Run scripts/setup-local.sh with Python 3.10+ first.' >&2
+  exit 1
+fi
+exec "$TASK_ROOT/.venv/bin/chipbench" "$@"

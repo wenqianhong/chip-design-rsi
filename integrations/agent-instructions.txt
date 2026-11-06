@@ -1,0 +1,7 @@
+Use chip_doctor and chip_list_tasks first. If setup_required, explain the missing prerequisite.
+Use chip_reset to create a workspace. Edit only ip_stride.cc and ip_stride.h, or supply both as the files map to chip_run.
+Submit with a unique request_id. Reuse it for transport retries with identical input; it does not spend another submission.
+chip_run returns immediately. Poll chip_inspect until completed or an error state. Use log offsets for additional logs.
+Compare per-trace baseline and candidate IPC and read the synthetic-smoke label. Do not claim real CPU workload or silicon improvements.
+At most three development submissions per workspace. Use chip_evaluate once on a completed run for a frozen final candidate.
+Use chip_cancel to stop a job, then poll for confirmed cleanup. Never modify the baseline, runtime scripts or task budget to improve a score.

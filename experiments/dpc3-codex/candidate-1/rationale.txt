@@ -1,0 +1,7 @@
+Changed only `ip_stride.cc` and `ip_stride.h`.
+
+- Preserve learned strides across same-line accesses.
+- Add a saturating confidence counter per tracker.
+- Increase degree from 3 to 5 after three stride confirmations, only below 0.5 MSHR occupancy.
+
+Tracker geometry remains 256 sets × 4 ways. This aims to improve stable-stream coverage while limiting extra traffic. No runs submitted; compilation and performance remain unverified.

@@ -1,0 +1,4 @@
+{
+  "run_id": "r-776efbd588084d97",
+  "rule": "Maximum development geometric mean among candidates with no >5% regression, if any; otherwise maximum valid mean. No validation feedback used."
+}

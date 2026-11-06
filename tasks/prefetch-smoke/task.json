@@ -1,0 +1,28 @@
+{
+  "id": "prefetch-smoke",
+  "version": "1",
+  "description": "Modify the L2 ip_stride prefetcher. Synthetic traces test the tool loop only; no real workload or silicon performance claim.",
+  "allowed_files": [
+    "ip_stride.cc",
+    "ip_stride.h"
+  ],
+  "max_submissions": 3,
+  "warmup_instructions": 10000,
+  "simulation_instructions": 50000,
+  "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+  "data_kind": "synthetic-smoke",
+  "evaluation": "Public synthetic validation set; not secret or a research benchmark",
+  "traces": {
+    "development": [
+      "stream",
+      "stride4",
+      "mixed"
+    ],
+    "validation": [
+      "validation2",
+      "validation8",
+      "validation_random"
+    ]
+  },
+  "repeats": 3
+}

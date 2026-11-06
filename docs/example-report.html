@@ -1,0 +1,351 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chipbench 实验报告</title><style>
+body{max-width:1000px;margin:35px auto;padding:0 20px 45px;background:#f5f5ef;color:#193b34;font:15px/1.7 system-ui}
+header{background:#193b34;color:white;border-radius:20px;padding:28px}h1{font-size:32px;margin:8px 0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.card,details{padding:20px;background:white;border:1px solid #dce2d9;border-radius:12px}.number{font-size:30px;font-weight:700}small{color:#63716b}.note{background:#eaf0df;padding:16px;border-left:3px solid #176b51}table{width:100%;border-collapse:collapse;background:white;font-size:13px}td,th{padding:14px;border-bottom:1px solid #dce2d9;text-align:left}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.bar{height:6px;background:#e9ede2;width:130px;position:relative}.bar:after{content:'';position:absolute;left:50%;height:10px;top:-2px;border-left:1px solid #b66b13}.bar i{display:block;background:#6f9d60;height:6px}.table{overflow:auto}details{margin-top:18px}summary{cursor:pointer}@media(max-width:620px){.cards{grid-template-columns:1fr}h1{font-size:26px}}
+</style><header><small style="color:#d6f18b">CHIPBENCH · REAL SIMULATION / SYNTHETIC INPUT</small><h1>预取器实验报告</h1><p>r-2e467bc6478f4246 · completed</p></header>
+<div class="cards"><div class="card"><small>IPC 几何平均变化</small><div class="number">+0.00%</div></div><div class="card"><small>数据类型</small><div class="number">合成 trace</div></div><div class="card"><small>VM 清理</small><div class="number">已完成</div></div></div>
+<div class="note">用于验证 Agent 工具闭环；不是实际程序的性能结论。基线与候选各重复 3 次，橙线表示 IPC 比值 1.0；没有提升也会保留结果。</div>
+<div class="table"><table><thead><tr><th>Trace</th><th>基线 IPC</th><th>候选 IPC</th><th>变化</th></tr></thead><tbody><tr><td>validation2</td><td>0.067997</td><td>0.067997</td><td>+0.00%<div class="bar"><i style="width:50.00%"></i></div></td></tr><tr><td>validation8</td><td>0.059685</td><td>0.059685</td><td>+0.00%<div class="bar"><i style="width:50.00%"></i></div></td></tr><tr><td>validation_random</td><td>0.109802</td><td>0.109802</td><td>+0.00%<div class="bar"><i style="width:50.00%"></i></div></td></tr></tbody></table></div>
+<p>实验状态与性能提升分别判断；请检查逐 trace 结果。</p><details><summary>展开完整结果与证据路径</summary><pre>{
+  &quot;schema_version&quot;: &quot;1&quot;,
+  &quot;run_id&quot;: &quot;r-2e467bc6478f4246&quot;,
+  &quot;workspace_id&quot;: &quot;w-c7493542425c44d5&quot;,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;kind&quot;: &quot;validation&quot;,
+  &quot;parent&quot;: &quot;r-a56c70ae2e864907&quot;,
+  &quot;source_sha256&quot;: &quot;cfcd8eab902b518039c3dc2d5ba83dd2032b1617af409c6544c82e87c9c373ee&quot;,
+  &quot;created_at&quot;: 1794000667.825471,
+  &quot;data_kind&quot;: &quot;synthetic-smoke&quot;,
+  &quot;metrics&quot;: {
+    &quot;ipc_ratios&quot;: {
+      &quot;validation2&quot;: 1.0,
+      &quot;validation8&quot;: 1.0,
+      &quot;validation_random&quot;: 1.0
+    },
+    &quot;geomean_ipc_ratio&quot;: 1.0,
+    &quot;threshold_met&quot;: false,
+    &quot;interpretation&quot;: &quot;Synthetic smoke results only; no real workload performance claim.&quot;,
+    &quot;runs&quot;: {
+      &quot;baseline&quot;: {
+        &quot;validation2&quot;: {
+          &quot;instructions&quot;: 50002,
+          &quot;cycles&quot;: 735357,
+          &quot;ipc&quot;: 0.06799690490469255,
+          &quot;l2_demand_mpki&quot;: 996.2601495940162,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.06799690490469255,
+            0.06799690490469255,
+            0.06799690490469255
+          ]
+        },
+        &quot;validation8&quot;: {
+          &quot;instructions&quot;: 50000,
+          &quot;cycles&quot;: 837725,
+          &quot;ipc&quot;: 0.05968545763824643,
+          &quot;l2_demand_mpki&quot;: 995.52,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.05968545763824644,
+            0.05968545763824644,
+            0.05968545763824644
+          ]
+        },
+        &quot;validation_random&quot;: {
+          &quot;instructions&quot;: 50001,
+          &quot;cycles&quot;: 455373,
+          &quot;ipc&quot;: 0.1098022939436462,
+          &quot;l2_demand_mpki&quot;: 875.642487150257,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.1098022939436462,
+            0.1098022939436462,
+            0.1098022939436462
+          ]
+        }
+      },
+      &quot;candidate&quot;: {
+        &quot;validation2&quot;: {
+          &quot;instructions&quot;: 50002,
+          &quot;cycles&quot;: 735357,
+          &quot;ipc&quot;: 0.06799690490469255,
+          &quot;l2_demand_mpki&quot;: 996.2601495940162,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.06799690490469255,
+            0.06799690490469255,
+            0.06799690490469255
+          ]
+        },
+        &quot;validation8&quot;: {
+          &quot;instructions&quot;: 50000,
+          &quot;cycles&quot;: 837725,
+          &quot;ipc&quot;: 0.05968545763824643,
+          &quot;l2_demand_mpki&quot;: 995.52,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.05968545763824644,
+            0.05968545763824644,
+            0.05968545763824644
+          ]
+        },
+        &quot;validation_random&quot;: {
+          &quot;instructions&quot;: 50001,
+          &quot;cycles&quot;: 455373,
+          &quot;ipc&quot;: 0.1098022939436462,
+          &quot;l2_demand_mpki&quot;: 875.642487150257,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.1098022939436462,
+            0.1098022939436462,
+            0.1098022939436462
+          ]
+        }
+      },
+      &quot;no_prefetch&quot;: {
+        &quot;validation2&quot;: {
+          &quot;instructions&quot;: 50002,
+          &quot;cycles&quot;: 735357,
+          &quot;ipc&quot;: 0.06799690490469255,
+          &quot;l2_demand_mpki&quot;: 996.2601495940162,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.06799690490469255
+          ]
+        },
+        &quot;validation8&quot;: {
+          &quot;instructions&quot;: 50000,
+          &quot;cycles&quot;: 837725,
+          &quot;ipc&quot;: 0.05968545763824644,
+          &quot;l2_demand_mpki&quot;: 995.52,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.05968545763824644
+          ]
+        },
+        &quot;validation_random&quot;: {
+          &quot;instructions&quot;: 50001,
+          &quot;cycles&quot;: 455373,
+          &quot;ipc&quot;: 0.1098022939436462,
+          &quot;l2_demand_mpki&quot;: 875.642487150257,
+          &quot;prefetch&quot;: {
+            &quot;PREFETCH&quot;: {
+              &quot;hit&quot;: [
+                0
+              ],
+              &quot;miss&quot;: [
+                0
+              ],
+              &quot;miss_merge&quot;: [
+                0
+              ]
+            },
+            &quot;prefetch issued&quot;: 0,
+            &quot;prefetch requested&quot;: 0,
+            &quot;useful prefetch&quot;: 0,
+            &quot;useless prefetch&quot;: 0
+          },
+          &quot;repeated_ipc&quot;: [
+            0.1098022939436462
+          ]
+        }
+      }
+    },
+    &quot;relative_spread&quot;: {
+      &quot;baseline&quot;: {
+        &quot;validation2&quot;: 0.0,
+        &quot;validation8&quot;: 0.0,
+        &quot;validation_random&quot;: 0.0
+      },
+      &quot;candidate&quot;: {
+        &quot;validation2&quot;: 0.0,
+        &quot;validation8&quot;: 0.0,
+        &quot;validation_random&quot;: 0.0
+      },
+      &quot;no_prefetch&quot;: {
+        &quot;validation2&quot;: 0.0,
+        &quot;validation8&quot;: 0.0,
+        &quot;validation_random&quot;: 0.0
+      }
+    },
+    &quot;network_isolated&quot;: true,
+    &quot;guest_elapsed_seconds&quot;: 49.893,
+    &quot;peak_child_rss_kib&quot;: 354188
+  },
+  &quot;error&quot;: null,
+  &quot;environment&quot;: {
+    &quot;lima&quot;: &quot;2.3.0&quot;,
+    &quot;backend&quot;: &quot;vz&quot;,
+    &quot;arch&quot;: &quot;aarch64&quot;,
+    &quot;champsim_commit&quot;: &quot;410cee62d9c429c043ea611325ce00e6c303be2a&quot;,
+    &quot;image_sha256&quot;: &quot;50e24e1fb79e89116e939d90aa7738f7af48c442fa1bc2510131e0b39c50348e&quot;,
+    &quot;packages_sha256&quot;: &quot;9a45cfc24b7b778710d60210443fcce4501a5456a552645ec3ebcff0ed4e22de&quot;,
+    &quot;provision_sha256&quot;: &quot;3d16d3f1852ed5fa0e6de06bbc597736e298a6dac67ca55f7eed9557f8843076&quot;,
+    &quot;traces&quot;: {
+      &quot;stream&quot;: {
+        &quot;sha256&quot;: &quot;d7ed2b74c771093aeed58b9b41cf3dd3ef32ab28201e3a7aa98a0d8491a0294b&quot;,
+        &quot;records&quot;: 80000,
+        &quot;kind&quot;: &quot;synthetic&quot;
+      },
+      &quot;stride4&quot;: {
+        &quot;sha256&quot;: &quot;1e719f62c820ef7abff0c88099e906b89c93f1efe77c6f198acef9f96495f2bd&quot;,
+        &quot;records&quot;: 80000,
+        &quot;kind&quot;: &quot;synthetic&quot;
+      },
+      &quot;mixed&quot;: {
+        &quot;sha256&quot;: &quot;c92225c036cd9193f7e43fdb1d1179fd29ed1d364d9a267d415272d57147cc74&quot;,
+        &quot;records&quot;: 80000,
+        &quot;kind&quot;: &quot;synthetic&quot;
+      },
+      &quot;validation2&quot;: {
+        &quot;sha256&quot;: &quot;5a08fa973132e2d8ae59aa1fdf6d19fca055300ceda09b77c0cf7210ccf780c5&quot;,
+        &quot;records&quot;: 80000,
+        &quot;kind&quot;: &quot;synthetic&quot;
+      },
+      &quot;validation8&quot;: {
+        &quot;sha256&quot;: &quot;913f3595df760bf0fdfccf83a9b18f63f84e652e8acb64779465c588260a4b9c&quot;,
+        &quot;records&quot;: 80000,
+        &quot;kind&quot;: &quot;synthetic&quot;
+      },
+      &quot;validation_random&quot;: {
+        &quot;sha256&quot;: &quot;0a053fd885f0da5ebd0d4dd946fcd1ef54f28de971b172c8bdca485b00e4454e&quot;,
+        &quot;records&quot;: 80000,
+        &quot;kind&quot;: &quot;synthetic&quot;
+      }
+    },
+    &quot;guest_runner_sha256&quot;: &quot;3e910b4ac30b87fefc04b54abbf09a6a4410283f0ac3b9ced0000217de5012e7&quot;
+  },
+  &quot;finished_at&quot;: 1794000726.481747,
+  &quot;cleanup_ok&quot;: true,
+  &quot;artifacts&quot;: {
+    &quot;note&quot;: &quot;Raw artifacts remain in the local .chipbench/runs directory.&quot;
+  }
+}</pre></details></html>

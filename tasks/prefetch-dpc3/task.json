@@ -1,0 +1,28 @@
+{
+  "id": "prefetch-dpc3",
+  "version": "1",
+  "description": "Optimize L2 ip_stride on fixed DPC3 SPEC CPU trace prefixes. No trace-name special cases, external I/O, or modifications outside the two prefetcher files. Keep tracker capacity unchanged.",
+  "allowed_files": [
+    "ip_stride.cc",
+    "ip_stride.h"
+  ],
+  "max_submissions": 3,
+  "warmup_instructions": 1000000,
+  "simulation_instructions": 2000000,
+  "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+  "data_kind": "dpc3-spec-prefix",
+  "evaluation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+  "traces": {
+    "development": [
+      "429.mcf-184B",
+      "433.milc-127B",
+      "462.libquantum-1343B"
+    ],
+    "validation": [
+      "470.lbm-1274B"
+    ]
+  },
+  "repeats": 3,
+  "source": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/",
+  "prefix_records": 3100000
+}

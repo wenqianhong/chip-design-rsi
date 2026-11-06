@@ -1,0 +1,1680 @@
+{
+  "selection": {
+    "run_id": "r-776efbd588084d97",
+    "rule": "Maximum development geometric mean among candidates with no >5% regression, if any; otherwise maximum valid mean. No validation feedback used."
+  },
+  "runs": [
+    {
+      "run_id": "r-776efbd588084d97",
+      "status": "completed",
+      "source_sha256": "374dc0bd39d5f282eeced5ae0edf9ca04eb62ffc21126b45c4e906cb28401eeb",
+      "kind": "development",
+      "created_at": 1794001525.431867,
+      "finished_at": 1794001991.6316721,
+      "data_kind": "dpc3-spec-prefix",
+      "metrics": {
+        "ipc_ratios": {
+          "429.mcf-184B": 1.0,
+          "433.milc-127B": 1.0028815168663634,
+          "462.libquantum-1343B": 1.225410038471501
+        },
+        "geomean_ipc_ratio": 1.0711337091759583,
+        "threshold_met": true,
+        "interpretation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+        "runs": {
+          "baseline": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16980941,
+              "ipc": 0.11777910305441848,
+              "l2_demand_mpki": 86.2985,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    61
+                  ],
+                  "miss": [
+                    25
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 86,
+                "prefetch requested": 86,
+                "useful prefetch": 11,
+                "useless prefetch": 14
+              },
+              "repeated_ipc": [
+                0.11777910305441848,
+                0.11777910305441848,
+                0.11777910305441848
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000000,
+              "cycles": 5321175,
+              "ipc": 0.37585683613111764,
+              "l2_demand_mpki": 29.1225,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    5697
+                  ],
+                  "miss": [
+                    4690
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 10387,
+                "prefetch requested": 10387,
+                "useful prefetch": 4693,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.37585683613111764,
+                0.37585683613111764,
+                0.37585683613111764
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000000,
+              "cycles": 2431613,
+              "ipc": 0.8224993039599641,
+              "l2_demand_mpki": 18.0505,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    6692
+                  ],
+                  "miss": [
+                    119829
+                  ],
+                  "miss_merge": [
+                    76879
+                  ]
+                },
+                "prefetch issued": 126521,
+                "prefetch requested": 126521,
+                "useful prefetch": 42947,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.8224993039599641,
+                0.8224993039599641,
+                0.8224993039599641
+              ]
+            }
+          },
+          "candidate": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16980941,
+              "ipc": 0.11777910305441848,
+              "l2_demand_mpki": 86.2985,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    61
+                  ],
+                  "miss": [
+                    25
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 86,
+                "prefetch requested": 86,
+                "useful prefetch": 11,
+                "useless prefetch": 14
+              },
+              "repeated_ipc": [
+                0.11777910305441848,
+                0.11777910305441848,
+                0.11777910305441848
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000000,
+              "cycles": 5305886,
+              "ipc": 0.37693987394376743,
+              "l2_demand_mpki": 29.0715,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    8942
+                  ],
+                  "miss": [
+                    4800
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 13742,
+                "prefetch requested": 13742,
+                "useful prefetch": 4795,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3769398739437674,
+                0.3769398739437674,
+                0.3769398739437674
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000000,
+              "cycles": 1984326,
+              "ipc": 1.0078989037083623,
+              "l2_demand_mpki": 10.242,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    26081
+                  ],
+                  "miss": [
+                    178532
+                  ],
+                  "miss_merge": [
+                    135512
+                  ]
+                },
+                "prefetch issued": 204613,
+                "prefetch requested": 204613,
+                "useful prefetch": 43020,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                1.0078989037083623,
+                1.0078989037083623,
+                1.0078989037083623
+              ]
+            }
+          },
+          "no_prefetch": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16985804,
+              "ipc": 0.1177453831446542,
+              "l2_demand_mpki": 86.3015,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.1177453831446542
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000002,
+              "cycles": 5559031,
+              "ipc": 0.3597752917729727,
+              "l2_demand_mpki": 31.468968531031468,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3597752917729727
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000001,
+              "cycles": 5408505,
+              "ipc": 0.3697881392362585,
+              "l2_demand_mpki": 22.577488711255643,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3697881392362585
+              ]
+            }
+          }
+        },
+        "relative_spread": {
+          "baseline": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          },
+          "candidate": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          },
+          "no_prefetch": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          }
+        },
+        "network_isolated": true,
+        "guest_elapsed_seconds": 457.526,
+        "peak_child_rss_kib": 354216
+      },
+      "error": null,
+      "environment": {
+        "lima": "2.3.0",
+        "backend": "vz",
+        "arch": "aarch64",
+        "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+        "image_sha256": "50e24e1fb79e89116e939d90aa7738f7af48c442fa1bc2510131e0b39c50348e",
+        "packages_sha256": "9a45cfc24b7b778710d60210443fcce4501a5456a552645ec3ebcff0ed4e22de",
+        "provision_sha256": "3d16d3f1852ed5fa0e6de06bbc597736e298a6dac67ca55f7eed9557f8843076",
+        "traces": {
+          "stream": {
+            "sha256": "d7ed2b74c771093aeed58b9b41cf3dd3ef32ab28201e3a7aa98a0d8491a0294b",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "stride4": {
+            "sha256": "1e719f62c820ef7abff0c88099e906b89c93f1efe77c6f198acef9f96495f2bd",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "mixed": {
+            "sha256": "c92225c036cd9193f7e43fdb1d1179fd29ed1d364d9a267d415272d57147cc74",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation2": {
+            "sha256": "5a08fa973132e2d8ae59aa1fdf6d19fca055300ceda09b77c0cf7210ccf780c5",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation8": {
+            "sha256": "913f3595df760bf0fdfccf83a9b18f63f84e652e8acb64779465c588260a4b9c",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation_random": {
+            "sha256": "0a053fd885f0da5ebd0d4dd946fcd1ef54f28de971b172c8bdca485b00e4454e",
+            "records": 80000,
+            "kind": "synthetic"
+          }
+        },
+        "dpc3": {
+          "task": {
+            "id": "prefetch-dpc3",
+            "version": "1",
+            "description": "Optimize L2 ip_stride on fixed DPC3 SPEC CPU trace prefixes. No trace-name special cases, external I/O, or modifications outside the two prefetcher files. Keep tracker capacity unchanged.",
+            "allowed_files": [
+              "ip_stride.cc",
+              "ip_stride.h"
+            ],
+            "max_submissions": 3,
+            "warmup_instructions": 1000000,
+            "simulation_instructions": 2000000,
+            "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+            "data_kind": "dpc3-spec-prefix",
+            "evaluation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+            "traces": {
+              "development": [
+                "429.mcf-184B",
+                "433.milc-127B",
+                "462.libquantum-1343B"
+              ],
+              "validation": [
+                "470.lbm-1274B"
+              ]
+            },
+            "repeats": 3,
+            "source": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/",
+            "prefix_records": 3100000
+          },
+          "traces": [
+            {
+              "name": "429.mcf-184B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/429.mcf-184B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"4c084310-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/1275609872",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 2097152,
+              "downloaded_prefix_sha256": "dadc10ce925d047da8682aca809b15ac6be2893c9f7a44ebd7cd30b621ef6e84",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "bd4b8b953030e8fb7f7fe5f71fd157142bf7e9c3932c18418bf1a4cdc3ad131e",
+              "sha256": "fb11b4504598bdca25294fa7aba51e1eb4f38ad454d90ec55f59c7b070fdd8c7",
+              "cached_bytes": 2332548
+            },
+            {
+              "name": "433.milc-127B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/433.milc-127B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"1f5a0124-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/525992228",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "0ee97f7605f71fd0a2d10535510382f3a0cd512e9defd11209f3e658fdff8574",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "06139bd4132773e631034a8b3b80e0b2475be9d1fc6058f1b969fe55434cefc5",
+              "sha256": "65997f84c37ff535bb071b5cbcee44513d7dde196492ccb259a67bd25c7f1190",
+              "cached_bytes": 957640
+            },
+            {
+              "name": "462.libquantum-1343B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/462.libquantum-1343B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"f05d7ec-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/252041196",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "2ddd2daac7c7b790ca98ef78395423b4bd52988e339a0486bc54292f74374995",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "e134537c05af9989f8e3317fa0b34176e2bfc14a73d93b025e5f98e42a6dd29b",
+              "sha256": "335a20ad0f8665eb405fad89f9fc8206b423eee50260a8d69535f14be24bef64",
+              "cached_bytes": 363744
+            },
+            {
+              "name": "470.lbm-1274B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/470.lbm-1274B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"295a98c4-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/693803204",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "f8a358839998e4779fbf7dea25b180fc384f2d5747ba3fdec41a4f2fa489e43e",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "a43e3a3bfc296495f9403d1e488e91b0559ff518bfff570a01292d0caae56f2f",
+              "sha256": "8a09614fa8101f11215757990ae535c686cdd09407df67a2dd45015a07dd250a",
+              "cached_bytes": 1171052
+            }
+          ]
+        },
+        "guest_runner_sha256": "5a06b9ced6a8cb3d31a09c4d6b9839103832e8c5eec3735677be67ebc89105f0"
+      },
+      "cleanup_ok": true,
+      "files_sha256": "9d8fbf148a59f2d427107a2de91c0ff5b0f474110534b43fd6d137adc998b26a"
+    },
+    {
+      "run_id": "r-c0ecc953c8504c20",
+      "status": "completed",
+      "source_sha256": "644b7e2786d07590653d71e2a1053ea781060e7c7eaf1e1cb0d681243eb3cf03",
+      "kind": "development",
+      "created_at": 1794002036.370328,
+      "finished_at": 1794002506.3241842,
+      "data_kind": "dpc3-spec-prefix",
+      "metrics": {
+        "ipc_ratios": {
+          "429.mcf-184B": 1.0,
+          "433.milc-127B": 1.0028815168663634,
+          "462.libquantum-1343B": 1.225410038471501
+        },
+        "geomean_ipc_ratio": 1.0711337091759583,
+        "threshold_met": true,
+        "interpretation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+        "runs": {
+          "baseline": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16980941,
+              "ipc": 0.11777910305441848,
+              "l2_demand_mpki": 86.2985,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    61
+                  ],
+                  "miss": [
+                    25
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 86,
+                "prefetch requested": 86,
+                "useful prefetch": 11,
+                "useless prefetch": 14
+              },
+              "repeated_ipc": [
+                0.11777910305441848,
+                0.11777910305441848,
+                0.11777910305441848
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000000,
+              "cycles": 5321175,
+              "ipc": 0.37585683613111764,
+              "l2_demand_mpki": 29.1225,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    5697
+                  ],
+                  "miss": [
+                    4690
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 10387,
+                "prefetch requested": 10387,
+                "useful prefetch": 4693,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.37585683613111764,
+                0.37585683613111764,
+                0.37585683613111764
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000000,
+              "cycles": 2431613,
+              "ipc": 0.8224993039599641,
+              "l2_demand_mpki": 18.0505,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    6692
+                  ],
+                  "miss": [
+                    119829
+                  ],
+                  "miss_merge": [
+                    76879
+                  ]
+                },
+                "prefetch issued": 126521,
+                "prefetch requested": 126521,
+                "useful prefetch": 42947,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.8224993039599641,
+                0.8224993039599641,
+                0.8224993039599641
+              ]
+            }
+          },
+          "candidate": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16980941,
+              "ipc": 0.11777910305441848,
+              "l2_demand_mpki": 86.2985,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    60
+                  ],
+                  "miss": [
+                    25
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 85,
+                "prefetch requested": 85,
+                "useful prefetch": 11,
+                "useless prefetch": 14
+              },
+              "repeated_ipc": [
+                0.11777910305441848,
+                0.11777910305441848,
+                0.11777910305441848
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000000,
+              "cycles": 5305886,
+              "ipc": 0.37693987394376743,
+              "l2_demand_mpki": 29.0715,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    8942
+                  ],
+                  "miss": [
+                    4800
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 13742,
+                "prefetch requested": 13742,
+                "useful prefetch": 4795,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3769398739437674,
+                0.3769398739437674,
+                0.3769398739437674
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000000,
+              "cycles": 1984326,
+              "ipc": 1.0078989037083623,
+              "l2_demand_mpki": 10.242,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    17722
+                  ],
+                  "miss": [
+                    109663
+                  ],
+                  "miss_merge": [
+                    66643
+                  ]
+                },
+                "prefetch issued": 127385,
+                "prefetch requested": 127385,
+                "useful prefetch": 43020,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                1.0078989037083623,
+                1.0078989037083623,
+                1.0078989037083623
+              ]
+            }
+          },
+          "no_prefetch": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16985804,
+              "ipc": 0.1177453831446542,
+              "l2_demand_mpki": 86.3015,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.1177453831446542
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000002,
+              "cycles": 5559031,
+              "ipc": 0.3597752917729727,
+              "l2_demand_mpki": 31.468968531031468,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3597752917729727
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000001,
+              "cycles": 5408505,
+              "ipc": 0.3697881392362585,
+              "l2_demand_mpki": 22.577488711255643,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3697881392362585
+              ]
+            }
+          }
+        },
+        "relative_spread": {
+          "baseline": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          },
+          "candidate": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          },
+          "no_prefetch": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          }
+        },
+        "network_isolated": true,
+        "guest_elapsed_seconds": 461.182,
+        "peak_child_rss_kib": 354196
+      },
+      "error": null,
+      "environment": {
+        "lima": "2.3.0",
+        "backend": "vz",
+        "arch": "aarch64",
+        "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+        "image_sha256": "50e24e1fb79e89116e939d90aa7738f7af48c442fa1bc2510131e0b39c50348e",
+        "packages_sha256": "9a45cfc24b7b778710d60210443fcce4501a5456a552645ec3ebcff0ed4e22de",
+        "provision_sha256": "3d16d3f1852ed5fa0e6de06bbc597736e298a6dac67ca55f7eed9557f8843076",
+        "traces": {
+          "stream": {
+            "sha256": "d7ed2b74c771093aeed58b9b41cf3dd3ef32ab28201e3a7aa98a0d8491a0294b",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "stride4": {
+            "sha256": "1e719f62c820ef7abff0c88099e906b89c93f1efe77c6f198acef9f96495f2bd",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "mixed": {
+            "sha256": "c92225c036cd9193f7e43fdb1d1179fd29ed1d364d9a267d415272d57147cc74",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation2": {
+            "sha256": "5a08fa973132e2d8ae59aa1fdf6d19fca055300ceda09b77c0cf7210ccf780c5",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation8": {
+            "sha256": "913f3595df760bf0fdfccf83a9b18f63f84e652e8acb64779465c588260a4b9c",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation_random": {
+            "sha256": "0a053fd885f0da5ebd0d4dd946fcd1ef54f28de971b172c8bdca485b00e4454e",
+            "records": 80000,
+            "kind": "synthetic"
+          }
+        },
+        "dpc3": {
+          "task": {
+            "id": "prefetch-dpc3",
+            "version": "1",
+            "description": "Optimize L2 ip_stride on fixed DPC3 SPEC CPU trace prefixes. No trace-name special cases, external I/O, or modifications outside the two prefetcher files. Keep tracker capacity unchanged.",
+            "allowed_files": [
+              "ip_stride.cc",
+              "ip_stride.h"
+            ],
+            "max_submissions": 3,
+            "warmup_instructions": 1000000,
+            "simulation_instructions": 2000000,
+            "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+            "data_kind": "dpc3-spec-prefix",
+            "evaluation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+            "traces": {
+              "development": [
+                "429.mcf-184B",
+                "433.milc-127B",
+                "462.libquantum-1343B"
+              ],
+              "validation": [
+                "470.lbm-1274B"
+              ]
+            },
+            "repeats": 3,
+            "source": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/",
+            "prefix_records": 3100000
+          },
+          "traces": [
+            {
+              "name": "429.mcf-184B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/429.mcf-184B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"4c084310-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/1275609872",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 2097152,
+              "downloaded_prefix_sha256": "dadc10ce925d047da8682aca809b15ac6be2893c9f7a44ebd7cd30b621ef6e84",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "bd4b8b953030e8fb7f7fe5f71fd157142bf7e9c3932c18418bf1a4cdc3ad131e",
+              "sha256": "fb11b4504598bdca25294fa7aba51e1eb4f38ad454d90ec55f59c7b070fdd8c7",
+              "cached_bytes": 2332548
+            },
+            {
+              "name": "433.milc-127B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/433.milc-127B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"1f5a0124-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/525992228",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "0ee97f7605f71fd0a2d10535510382f3a0cd512e9defd11209f3e658fdff8574",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "06139bd4132773e631034a8b3b80e0b2475be9d1fc6058f1b969fe55434cefc5",
+              "sha256": "65997f84c37ff535bb071b5cbcee44513d7dde196492ccb259a67bd25c7f1190",
+              "cached_bytes": 957640
+            },
+            {
+              "name": "462.libquantum-1343B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/462.libquantum-1343B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"f05d7ec-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/252041196",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "2ddd2daac7c7b790ca98ef78395423b4bd52988e339a0486bc54292f74374995",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "e134537c05af9989f8e3317fa0b34176e2bfc14a73d93b025e5f98e42a6dd29b",
+              "sha256": "335a20ad0f8665eb405fad89f9fc8206b423eee50260a8d69535f14be24bef64",
+              "cached_bytes": 363744
+            },
+            {
+              "name": "470.lbm-1274B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/470.lbm-1274B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"295a98c4-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/693803204",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "f8a358839998e4779fbf7dea25b180fc384f2d5747ba3fdec41a4f2fa489e43e",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "a43e3a3bfc296495f9403d1e488e91b0559ff518bfff570a01292d0caae56f2f",
+              "sha256": "8a09614fa8101f11215757990ae535c686cdd09407df67a2dd45015a07dd250a",
+              "cached_bytes": 1171052
+            }
+          ]
+        },
+        "guest_runner_sha256": "5a06b9ced6a8cb3d31a09c4d6b9839103832e8c5eec3735677be67ebc89105f0"
+      },
+      "cleanup_ok": true,
+      "files_sha256": "b8f006866e44dcebff2d9756a51f50d5d9c5f988f8c3a26f556569b4e17c091f"
+    },
+    {
+      "run_id": "r-3c2dead128144637",
+      "status": "completed",
+      "source_sha256": "7470d10f2cc84f2035fa72262ab18f4c918613aa71cc8bbd3d8b3474a2d33c81",
+      "kind": "development",
+      "created_at": 1794002545.063474,
+      "finished_at": 1794003005.15769,
+      "data_kind": "dpc3-spec-prefix",
+      "metrics": {
+        "ipc_ratios": {
+          "429.mcf-184B": 1.0,
+          "433.milc-127B": 1.0028815168663634,
+          "462.libquantum-1343B": 1.2216189542657148
+        },
+        "geomean_ipc_ratio": 1.0700279696554256,
+        "threshold_met": true,
+        "interpretation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+        "runs": {
+          "baseline": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16980941,
+              "ipc": 0.11777910305441848,
+              "l2_demand_mpki": 86.2985,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    61
+                  ],
+                  "miss": [
+                    25
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 86,
+                "prefetch requested": 86,
+                "useful prefetch": 11,
+                "useless prefetch": 14
+              },
+              "repeated_ipc": [
+                0.11777910305441848,
+                0.11777910305441848,
+                0.11777910305441848
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000000,
+              "cycles": 5321175,
+              "ipc": 0.37585683613111764,
+              "l2_demand_mpki": 29.1225,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    5697
+                  ],
+                  "miss": [
+                    4690
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 10387,
+                "prefetch requested": 10387,
+                "useful prefetch": 4693,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.37585683613111764,
+                0.37585683613111764,
+                0.37585683613111764
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000000,
+              "cycles": 2431613,
+              "ipc": 0.8224993039599641,
+              "l2_demand_mpki": 18.0505,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    6692
+                  ],
+                  "miss": [
+                    119829
+                  ],
+                  "miss_merge": [
+                    76879
+                  ]
+                },
+                "prefetch issued": 126521,
+                "prefetch requested": 126521,
+                "useful prefetch": 42947,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.8224993039599641,
+                0.8224993039599641,
+                0.8224993039599641
+              ]
+            }
+          },
+          "candidate": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16980941,
+              "ipc": 0.11777910305441848,
+              "l2_demand_mpki": 86.2985,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    60
+                  ],
+                  "miss": [
+                    25
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 85,
+                "prefetch requested": 85,
+                "useful prefetch": 11,
+                "useless prefetch": 14
+              },
+              "repeated_ipc": [
+                0.11777910305441848,
+                0.11777910305441848,
+                0.11777910305441848
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000000,
+              "cycles": 5305886,
+              "ipc": 0.37693987394376743,
+              "l2_demand_mpki": 29.0715,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    8942
+                  ],
+                  "miss": [
+                    4800
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 13742,
+                "prefetch requested": 13742,
+                "useful prefetch": 4795,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3769398739437674,
+                0.3769398739437674,
+                0.3769398739437674
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000003,
+              "cycles": 1990487,
+              "ipc": 1.0047807395878496,
+              "l2_demand_mpki": 10.222484666273001,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    17941
+                  ],
+                  "miss": [
+                    109475
+                  ],
+                  "miss_merge": [
+                    66453
+                  ]
+                },
+                "prefetch issued": 127416,
+                "prefetch requested": 127416,
+                "useful prefetch": 43017,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                1.0047807395878496,
+                1.0047807395878496,
+                1.0047807395878496
+              ]
+            }
+          },
+          "no_prefetch": {
+            "429.mcf-184B": {
+              "instructions": 2000000,
+              "cycles": 16985804,
+              "ipc": 0.1177453831446542,
+              "l2_demand_mpki": 86.3015,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.1177453831446542
+              ]
+            },
+            "433.milc-127B": {
+              "instructions": 2000002,
+              "cycles": 5559031,
+              "ipc": 0.3597752917729727,
+              "l2_demand_mpki": 31.468968531031468,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3597752917729727
+              ]
+            },
+            "462.libquantum-1343B": {
+              "instructions": 2000001,
+              "cycles": 5408505,
+              "ipc": 0.3697881392362585,
+              "l2_demand_mpki": 22.577488711255643,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.3697881392362585
+              ]
+            }
+          }
+        },
+        "relative_spread": {
+          "baseline": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          },
+          "candidate": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          },
+          "no_prefetch": {
+            "429.mcf-184B": 0.0,
+            "433.milc-127B": 0.0,
+            "462.libquantum-1343B": 0.0
+          }
+        },
+        "network_isolated": true,
+        "guest_elapsed_seconds": 451.362,
+        "peak_child_rss_kib": 354208
+      },
+      "error": null,
+      "environment": {
+        "lima": "2.3.0",
+        "backend": "vz",
+        "arch": "aarch64",
+        "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+        "image_sha256": "50e24e1fb79e89116e939d90aa7738f7af48c442fa1bc2510131e0b39c50348e",
+        "packages_sha256": "9a45cfc24b7b778710d60210443fcce4501a5456a552645ec3ebcff0ed4e22de",
+        "provision_sha256": "3d16d3f1852ed5fa0e6de06bbc597736e298a6dac67ca55f7eed9557f8843076",
+        "traces": {
+          "stream": {
+            "sha256": "d7ed2b74c771093aeed58b9b41cf3dd3ef32ab28201e3a7aa98a0d8491a0294b",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "stride4": {
+            "sha256": "1e719f62c820ef7abff0c88099e906b89c93f1efe77c6f198acef9f96495f2bd",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "mixed": {
+            "sha256": "c92225c036cd9193f7e43fdb1d1179fd29ed1d364d9a267d415272d57147cc74",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation2": {
+            "sha256": "5a08fa973132e2d8ae59aa1fdf6d19fca055300ceda09b77c0cf7210ccf780c5",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation8": {
+            "sha256": "913f3595df760bf0fdfccf83a9b18f63f84e652e8acb64779465c588260a4b9c",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation_random": {
+            "sha256": "0a053fd885f0da5ebd0d4dd946fcd1ef54f28de971b172c8bdca485b00e4454e",
+            "records": 80000,
+            "kind": "synthetic"
+          }
+        },
+        "dpc3": {
+          "task": {
+            "id": "prefetch-dpc3",
+            "version": "1",
+            "description": "Optimize L2 ip_stride on fixed DPC3 SPEC CPU trace prefixes. No trace-name special cases, external I/O, or modifications outside the two prefetcher files. Keep tracker capacity unchanged.",
+            "allowed_files": [
+              "ip_stride.cc",
+              "ip_stride.h"
+            ],
+            "max_submissions": 3,
+            "warmup_instructions": 1000000,
+            "simulation_instructions": 2000000,
+            "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+            "data_kind": "dpc3-spec-prefix",
+            "evaluation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+            "traces": {
+              "development": [
+                "429.mcf-184B",
+                "433.milc-127B",
+                "462.libquantum-1343B"
+              ],
+              "validation": [
+                "470.lbm-1274B"
+              ]
+            },
+            "repeats": 3,
+            "source": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/",
+            "prefix_records": 3100000
+          },
+          "traces": [
+            {
+              "name": "429.mcf-184B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/429.mcf-184B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"4c084310-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/1275609872",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 2097152,
+              "downloaded_prefix_sha256": "dadc10ce925d047da8682aca809b15ac6be2893c9f7a44ebd7cd30b621ef6e84",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "bd4b8b953030e8fb7f7fe5f71fd157142bf7e9c3932c18418bf1a4cdc3ad131e",
+              "sha256": "fb11b4504598bdca25294fa7aba51e1eb4f38ad454d90ec55f59c7b070fdd8c7",
+              "cached_bytes": 2332548
+            },
+            {
+              "name": "433.milc-127B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/433.milc-127B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"1f5a0124-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/525992228",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "0ee97f7605f71fd0a2d10535510382f3a0cd512e9defd11209f3e658fdff8574",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "06139bd4132773e631034a8b3b80e0b2475be9d1fc6058f1b969fe55434cefc5",
+              "sha256": "65997f84c37ff535bb071b5cbcee44513d7dde196492ccb259a67bd25c7f1190",
+              "cached_bytes": 957640
+            },
+            {
+              "name": "462.libquantum-1343B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/462.libquantum-1343B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"f05d7ec-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/252041196",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "2ddd2daac7c7b790ca98ef78395423b4bd52988e339a0486bc54292f74374995",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "e134537c05af9989f8e3317fa0b34176e2bfc14a73d93b025e5f98e42a6dd29b",
+              "sha256": "335a20ad0f8665eb405fad89f9fc8206b423eee50260a8d69535f14be24bef64",
+              "cached_bytes": 363744
+            },
+            {
+              "name": "470.lbm-1274B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/470.lbm-1274B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"295a98c4-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/693803204",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "f8a358839998e4779fbf7dea25b180fc384f2d5747ba3fdec41a4f2fa489e43e",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "a43e3a3bfc296495f9403d1e488e91b0559ff518bfff570a01292d0caae56f2f",
+              "sha256": "8a09614fa8101f11215757990ae535c686cdd09407df67a2dd45015a07dd250a",
+              "cached_bytes": 1171052
+            }
+          ]
+        },
+        "guest_runner_sha256": "5a06b9ced6a8cb3d31a09c4d6b9839103832e8c5eec3735677be67ebc89105f0"
+      },
+      "cleanup_ok": true,
+      "files_sha256": "2b99e1c407e96529de840e32baa0330c96512ff69c97446ec24054025074b82a"
+    },
+    {
+      "run_id": "r-f522e6a1e98e49a3",
+      "status": "completed",
+      "source_sha256": "1a7b0f8a6f9dec057c75d618fa5a5fc543c8f999c0266abe23a9d712cabde9b8",
+      "parent": "r-776efbd588084d97",
+      "kind": "validation",
+      "created_at": 1794003005.420259,
+      "finished_at": 1794003106.567415,
+      "data_kind": "dpc3-spec-prefix",
+      "metrics": {
+        "ipc_ratios": {
+          "470.lbm-1274B": 1.0015833500433198
+        },
+        "geomean_ipc_ratio": 1.0015833500433198,
+        "threshold_met": false,
+        "interpretation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+        "runs": {
+          "baseline": {
+            "470.lbm-1274B": {
+              "instructions": 2000000,
+              "cycles": 3176778,
+              "ipc": 0.6295687013697526,
+              "l2_demand_mpki": 25.843,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    8787
+                  ],
+                  "miss": [
+                    6047
+                  ],
+                  "miss_merge": [
+                    58
+                  ]
+                },
+                "prefetch issued": 14834,
+                "prefetch requested": 14834,
+                "useful prefetch": 5991,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.6295687013697526,
+                0.6295687013697526,
+                0.6295687013697526
+              ]
+            }
+          },
+          "candidate": {
+            "470.lbm-1274B": {
+              "instructions": 2000000,
+              "cycles": 3171756,
+              "ipc": 0.6305655290003392,
+              "l2_demand_mpki": 25.7875,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    12693
+                  ],
+                  "miss": [
+                    6136
+                  ],
+                  "miss_merge": [
+                    73
+                  ]
+                },
+                "prefetch issued": 18829,
+                "prefetch requested": 18829,
+                "useful prefetch": 6063,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.6305655290003392,
+                0.6305655290003392,
+                0.6305655290003392
+              ]
+            }
+          },
+          "no_prefetch": {
+            "470.lbm-1274B": {
+              "instructions": 2000001,
+              "cycles": 3289823,
+              "ipc": 0.6079357460872515,
+              "l2_demand_mpki": 28.83498558250721,
+              "prefetch": {
+                "PREFETCH": {
+                  "hit": [
+                    0
+                  ],
+                  "miss": [
+                    0
+                  ],
+                  "miss_merge": [
+                    0
+                  ]
+                },
+                "prefetch issued": 0,
+                "prefetch requested": 0,
+                "useful prefetch": 0,
+                "useless prefetch": 0
+              },
+              "repeated_ipc": [
+                0.6079357460872515
+              ]
+            }
+          }
+        },
+        "relative_spread": {
+          "baseline": {
+            "470.lbm-1274B": 0.0
+          },
+          "candidate": {
+            "470.lbm-1274B": 0.0
+          },
+          "no_prefetch": {
+            "470.lbm-1274B": 0.0
+          }
+        },
+        "network_isolated": true,
+        "guest_elapsed_seconds": 92.51,
+        "peak_child_rss_kib": 354192
+      },
+      "error": null,
+      "environment": {
+        "lima": "2.3.0",
+        "backend": "vz",
+        "arch": "aarch64",
+        "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+        "image_sha256": "50e24e1fb79e89116e939d90aa7738f7af48c442fa1bc2510131e0b39c50348e",
+        "packages_sha256": "9a45cfc24b7b778710d60210443fcce4501a5456a552645ec3ebcff0ed4e22de",
+        "provision_sha256": "3d16d3f1852ed5fa0e6de06bbc597736e298a6dac67ca55f7eed9557f8843076",
+        "traces": {
+          "stream": {
+            "sha256": "d7ed2b74c771093aeed58b9b41cf3dd3ef32ab28201e3a7aa98a0d8491a0294b",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "stride4": {
+            "sha256": "1e719f62c820ef7abff0c88099e906b89c93f1efe77c6f198acef9f96495f2bd",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "mixed": {
+            "sha256": "c92225c036cd9193f7e43fdb1d1179fd29ed1d364d9a267d415272d57147cc74",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation2": {
+            "sha256": "5a08fa973132e2d8ae59aa1fdf6d19fca055300ceda09b77c0cf7210ccf780c5",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation8": {
+            "sha256": "913f3595df760bf0fdfccf83a9b18f63f84e652e8acb64779465c588260a4b9c",
+            "records": 80000,
+            "kind": "synthetic"
+          },
+          "validation_random": {
+            "sha256": "0a053fd885f0da5ebd0d4dd946fcd1ef54f28de971b172c8bdca485b00e4454e",
+            "records": 80000,
+            "kind": "synthetic"
+          }
+        },
+        "dpc3": {
+          "task": {
+            "id": "prefetch-dpc3",
+            "version": "1",
+            "description": "Optimize L2 ip_stride on fixed DPC3 SPEC CPU trace prefixes. No trace-name special cases, external I/O, or modifications outside the two prefetcher files. Keep tracker capacity unchanged.",
+            "allowed_files": [
+              "ip_stride.cc",
+              "ip_stride.h"
+            ],
+            "max_submissions": 3,
+            "warmup_instructions": 1000000,
+            "simulation_instructions": 2000000,
+            "champsim_commit": "410cee62d9c429c043ea611325ce00e6c303be2a",
+            "data_kind": "dpc3-spec-prefix",
+            "evaluation": "DPC3 public SPEC CPU traces, fixed short prefixes on modern pinned ChampSim; not official DPC3 or SPEC scores. Public held-out workload is used once after candidate selection.",
+            "traces": {
+              "development": [
+                "429.mcf-184B",
+                "433.milc-127B",
+                "462.libquantum-1343B"
+              ],
+              "validation": [
+                "470.lbm-1274B"
+              ]
+            },
+            "repeats": 3,
+            "source": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/",
+            "prefix_records": 3100000
+          },
+          "traces": [
+            {
+              "name": "429.mcf-184B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/429.mcf-184B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"4c084310-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/1275609872",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 2097152,
+              "downloaded_prefix_sha256": "dadc10ce925d047da8682aca809b15ac6be2893c9f7a44ebd7cd30b621ef6e84",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "bd4b8b953030e8fb7f7fe5f71fd157142bf7e9c3932c18418bf1a4cdc3ad131e",
+              "sha256": "fb11b4504598bdca25294fa7aba51e1eb4f38ad454d90ec55f59c7b070fdd8c7",
+              "cached_bytes": 2332548
+            },
+            {
+              "name": "433.milc-127B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/433.milc-127B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 14:12:24 GMT",
+                "ETag": "\"1f5a0124-5e87b7c162200\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/525992228",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "0ee97f7605f71fd0a2d10535510382f3a0cd512e9defd11209f3e658fdff8574",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "06139bd4132773e631034a8b3b80e0b2475be9d1fc6058f1b969fe55434cefc5",
+              "sha256": "65997f84c37ff535bb071b5cbcee44513d7dde196492ccb259a67bd25c7f1190",
+              "cached_bytes": 957640
+            },
+            {
+              "name": "462.libquantum-1343B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/462.libquantum-1343B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"f05d7ec-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/252041196",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "2ddd2daac7c7b790ca98ef78395423b4bd52988e339a0486bc54292f74374995",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "e134537c05af9989f8e3317fa0b34176e2bfc14a73d93b025e5f98e42a6dd29b",
+              "sha256": "335a20ad0f8665eb405fad89f9fc8206b423eee50260a8d69535f14be24bef64",
+              "cached_bytes": 363744
+            },
+            {
+              "name": "470.lbm-1274B",
+              "url": "https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/470.lbm-1274B.champsimtrace.xz",
+              "source_headers": {
+                "Date": "Fri, 06 Nov 2026 21:44:27 GMT",
+                "Server": "Apache/2.4.52 (Ubuntu)",
+                "Last-Modified": "Mon, 12 Sep 2022 15:12:21 GMT",
+                "ETag": "\"295a98c4-5e87c527bff40\"",
+                "Accept-Ranges": "bytes",
+                "Content-Length": "67108864",
+                "Content-Range": "bytes 0-67108863/693803204",
+                "Connection": "close",
+                "Content-Type": "application/x-xz"
+              },
+              "downloaded_bytes": 1048576,
+              "downloaded_prefix_sha256": "f8a358839998e4779fbf7dea25b180fc384f2d5747ba3fdec41a4f2fa489e43e",
+              "record_count": 3100000,
+              "raw_prefix_sha256": "a43e3a3bfc296495f9403d1e488e91b0559ff518bfff570a01292d0caae56f2f",
+              "sha256": "8a09614fa8101f11215757990ae535c686cdd09407df67a2dd45015a07dd250a",
+              "cached_bytes": 1171052
+            }
+          ]
+        },
+        "guest_runner_sha256": "5a06b9ced6a8cb3d31a09c4d6b9839103832e8c5eec3735677be67ebc89105f0"
+      },
+      "cleanup_ok": true,
+      "files_sha256": "9d8fbf148a59f2d427107a2de91c0ff5b0f474110534b43fd6d137adc998b26a"
+    }
+  ],
+  "codex_usage": [
+    {
+      "attempt": 1,
+      "input_tokens": 95879,
+      "cached_input_tokens": 82048,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1047,
+      "reasoning_output_tokens": 173
+    },
+    {
+      "attempt": 2,
+      "input_tokens": 92442,
+      "cached_input_tokens": 74624,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1214,
+      "reasoning_output_tokens": 187
+    },
+    {
+      "attempt": 3,
+      "input_tokens": 120268,
+      "cached_input_tokens": 111104,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1094,
+      "reasoning_output_tokens": 176
+    }
+  ],
+  "hash_note": "source_sha256 is legacy full input fingerprint; files_sha256 hashes only the frozen two source files."
+}

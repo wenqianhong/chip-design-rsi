@@ -1,0 +1,86 @@
+#include "ip_stride.h"
+
+#include "cache.h"
+
+uint32_t ip_stride::prefetcher_cache_operate(champsim::address addr, champsim::address ip, uint8_t cache_hit, bool useful_prefetch, access_type type,
+                                             uint32_t metadata_in)
+{
+  champsim::block_number cl_addr{addr};
+  champsim::block_number::difference_type stride = 0;
+  uint8_t confidence = 0;
+
+  auto found = table.check_hit({ip, cl_addr, stride});
+
+  // if we found a matching entry
+  if (found.has_value()) {
+    stride = champsim::offset(found->last_cl_addr, cl_addr);
+
+    // Multiple accesses within a line are not new stride observations. Preserve
+    // the learned stride and refresh LRU without restarting the lookahead.
+    if (stride == 0) {
+      table.fill(found.value());
+      return metadata_in;
+    }
+
+    if (stride == found->last_stride) {
+      confidence = found->confidence < 3 ? found->confidence + 1 : 3;
+      // Give stable streams more lead time only when there is MSHR headroom.
+      const int degree = confidence == 3 && intern_->get_mshr_occupancy_ratio() < 0.5
+                             ? CONFIDENT_PREFETCH_DEGREE
+                             : PREFETCH_DEGREE;
+      active_lookahead = {champsim::address{cl_addr}, stride, degree};
+    }
+  }
+
+  // update tracking set
+  table.fill({ip, cl_addr, stride, confidence});
+
+  return metadata_in;
+}
+
+void ip_stride::prefetcher_cycle_operate()
+{
+  for (auto& recent : recent_prefetches) {
+    if (recent.lifetime > 0)
+      --recent.lifetime;
+  }
+
+  // If a lookahead is active
+  if (active_lookahead.has_value()) {
+    auto [old_pf_address, stride, degree] = active_lookahead.value();
+    assert(degree > 0);
+
+    champsim::address pf_address{champsim::block_number{old_pf_address} + stride};
+
+    // If the next step would exceed the degree or run off the page, stop
+    if (intern_->virtual_prefetch || champsim::page_number{pf_address} == champsim::page_number{old_pf_address}) {
+      // check the MSHR occupancy to decide if we're going to prefetch to this level or not
+      const bool mshr_under_light_load = intern_->get_mshr_occupancy_ratio() < 0.5;
+      bool duplicate = false;
+      for (const auto& recent : recent_prefetches)
+        duplicate = duplicate || (recent.lifetime > 0 && recent.address == champsim::block_number{pf_address});
+
+      const bool success = duplicate || prefetch_line(pf_address, mshr_under_light_load, 0);
+      // Do not record requests that bypass L2: a later request with headroom
+      // should still be allowed to bring the line into this cache.
+      if (success && !duplicate && mshr_under_light_load) {
+        recent_prefetches[next_recent] = {champsim::block_number{pf_address}, RECENT_LIFETIME};
+        next_recent = (next_recent + 1) % recent_prefetches.size();
+      }
+      if (success)
+        active_lookahead = {pf_address, stride, degree - 1};
+      // If we fail, try again next cycle
+
+      if (active_lookahead->degree == 0) {
+        active_lookahead.reset();
+      }
+    } else {
+      active_lookahead.reset();
+    }
+  }
+}
+
+uint32_t ip_stride::prefetcher_cache_fill(champsim::address addr, long set, long way, uint8_t prefetch, champsim::address evicted_addr, uint32_t metadata_in)
+{
+  return metadata_in;
+}

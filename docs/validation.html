@@ -1,0 +1,27 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chipbench · v0.1 验收记录</title><style>
+body{max-width:1080px;margin:32px auto;padding:0 22px 50px;font:15px/1.75 system-ui,-apple-system,'PingFang SC',sans-serif;background:#f5f5ef;color:#193b34}header{background:#193b34;color:white;padding:32px;border-radius:20px}h1{font-size:36px;margin:10px 0}h2{margin-top:32px}a{color:#176b51}header a{color:#d6f18b}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.card{background:white;border:1px solid #dce2d9;border-radius:14px;padding:20px}.num{font-size:32px;font-weight:700}.card p{font-size:13px;color:#63716b}table{width:100%;border-collapse:collapse;background:white;font-size:13px}td,th{text-align:left;padding:13px;border-bottom:1px solid #dce2d9}.table{overflow:auto}.ok{color:#176b51;font-weight:bold}.pending{color:#a65c2c;font-weight:bold}.note{padding:16px;background:#eaf0df;border-left:3px solid #176b51;margin-top:16px}code{font-size:12px;overflow-wrap:anywhere}small{color:#63716b}@media(max-width:650px){.cards{grid-template-columns:1fr}h1{font-size:28px}}
+</style></head><body>
+<header><small style="color:#d6f18b">2026-11-07 · ACTUAL LOCAL RUNS</small><h1>本地执行闭环已跑通。</h1><p>Mac 上真实运行 ChampSim，记录成功、失败和取消。以下是已完成的验证，不把计划当成果。</p><a href="quickstart.html">使用说明</a> · <a href="example-report.html">打开可视化实验报告</a> · <a href="v0.1-plan.html">开发计划</a></header>
+<div class="cards"><div class="card"><div class="num">9 / 9</div><p>自动化测试通过：解析、输入边界、预算、幂等、冻结候选、报告转义、恢复清理、MCP 和 trace 格式（部分在同一测试内）。</p></div><div class="card"><div class="num">5 次</div><p>真实 VM 运行：取消 1 次、开发成功 1 次、最终验证成功 1 次、编译失败 1 次、超时 1 次；任务 VM 均已删除。</p></div><div class="card"><div class="num">+0.00%</div><p>预取深度 3 → 4，在本次开发与最终合成验证集上 IPC 几何平均无变化。这是结果，不是优化成功。</p></div></div>
+<h2>已实测</h2><div class="table"><table><thead><tr><th>检查</th><th>结果</th><th>证据</th></tr></thead><tbody>
+<tr><td>本地环境</td><td class="ok">通过</td><td>Apple Silicon / macOS 26.5.1；Lima 2.3.0 + VZ；Ubuntu 24.04 ARM64。</td></tr>
+<tr><td>ChampSim 编译</td><td class="ok">通过</td><td>固定提交 410cee62d9c429c043ea611325ce00e6c303be2a；原生 ARM 编译，未使用 Docker。</td></tr>
+<tr><td>隔离执行</td><td class="ok">通过</td><td>plain 模式无宿主目录挂载；chipworker 非 root；实验网络命名空间仅 loopback，外部连接失败。</td></tr>
+<tr><td>取消与清理</td><td class="ok">通过</td><td><code>r-669a1e89a8f044b7</code> → cancelled，cleanup_ok=true。</td></tr>
+<tr><td>开发集实验</td><td class="ok">通过</td><td><code>r-a56c70ae2e864907</code> → completed；3 条 trace，基线与候选各重复 3 次；VM 已删除。</td></tr>
+<tr><td>最终验证</td><td class="ok">通过</td><td><code>r-2e467bc6478f4246</code> → completed；冻结已有输入，在 3 条不同的公开合成 trace 上重跑；VM 已删除。</td></tr>
+<tr><td>编译失败</td><td class="ok">通过</td><td>通过 MCP 提交非法 C++，<code>r-1aa15e60364c42c3</code> → compile_error；保留日志，未输出伪造分数；VM 已删除。</td></tr>
+<tr><td>运行超时</td><td class="ok">通过</td><td>设置 3 秒总预算，<code>r-c1231e8cee1d4da3</code> → timeout，cleanup_ok=true；未残留任务 VM。</td></tr><tr><td>MCP stdio</td><td class="ok">通过</td><td>标准 SDK 完成 initialize、发现 7 个工具、reset、doctor 和实际 run；CLI/MCP 共用核心。</td></tr>
+<tr><td>DeepSeek Harness 配置</td><td class="ok">通过配置检查</td><td>本机 0.2.1-rc.2 的 MCP 插件已核验；--patch + --dump-config 成功合并 chipbench。</td></tr>
+</tbody></table></div>
+<h2>仍未完成的验收</h2><div class="table"><table><thead><tr><th>项目</th><th>当前状态</th><th>后续动作</th></tr></thead><tbody>
+<tr><td>三个客户端模型驱动实验</td><td class="pending">待验证</td><td>已生成项目 Codex / Claude Code 配置和 dsh overlay，但未分别让三个模型完成自主修改。当前 Codex CLI 链接失效、Claude Code CLI 未安装；未改动模型登录或购买 API 用量。</td></tr>
+<tr><td>真实工作负载与秘密留出集</td><td class="pending">待接入</td><td>当前是 6 条公开合成 trace。真实任务需要明确来源和授权，再冻结数据、阈值与基线。</td></tr>
+<tr><td>OOM / 磁盘满</td><td class="pending">故障注入待补</td><td>已实现时间、VM 内存、磁盘与日志限制；实测了超时、取消和编译错误，尚未注入 OOM 和磁盘满。OOM 暂不保证独立分类。</td></tr>
+<tr><td>重启恢复</td><td class="pending">单元测试通过</td><td>recover 只清理数据库记录中已失联任务的实例；尚未做真实 Mac 重启测试。</td></tr>
+<tr><td>生产与公开排行榜</td><td class="pending">不在本轮交付</td><td>尚未做抗恶意评分篡改、多用户鉴权、并发调度和生产级安全审计。</td></tr>
+</tbody></table></div>
+<div class="note"><b>基础 VM：</b>保留一台停止状态的 chipbench-base，用于下一次实验；不占运行时内存。每次任务克隆独立磁盘，结束后删除任务 VM。依赖安装需联网，实验代码不能联网。</div>
+<h2>可复查的方法</h2><p>运行 <code>.venv/bin/python -m pytest -q</code> 重跑自动化测试；运行 <code>.venv/bin/python scripts/check-mcp.py</code> 检查 MCP。真实实验结果保存在项目 <code>.chipbench/runs/</code>，未上传 GitHub。</p>
+<p>本页和样例报告不包含模型凭据。该报告只证实指定机器与版本的运行，不代表所有 Mac 或全部 Agent 客户端已兼容。</p>
+<section><h2>2026-11-07 · Codex + DPC-3 真实 trace</h2><p>已通过 10 项自动检查，并完成 3 次开发候选 + 1 次冻结验证。全部编译成功、三遍重复一致、网络隔离检查通过、任务 VM 清理成功。沿用用户已登录的 Codex CLI，未新增 API key。</p><p>开发几何平均：+7.11%、+7.11%、+7.00%。选择第 1 个候选；lbm 验证 +0.16%，没有达到 +1% 门槛。只说明固定短窗口上的表现，不能宣称完整 SPEC 成绩或通用提升。</p><p><a href="benchmark.html">完整实验报告与补丁</a></p></section></body></html>

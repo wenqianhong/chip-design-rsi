@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Codex × DPC-3 实测</title><style>body{max-width:1000px;margin:40px auto;padding:0 24px;background:#f5f5ef;color:#193b34;font:16px/1.75 system-ui}header{background:#193b34;color:#fff;padding:30px;border-radius:20px}h1{font-size:36px;margin:8px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.card,section{background:white;border:1px solid #dce2d9;padding:22px;border-radius:16px;margin:14px 0}.big{font-size:32px;font-weight:700}small{color:#60766d}table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid #ddd;text-align:left}.flow{font-size:20px;font-weight:600}.note{border-left:4px solid #b48435;padding:15px;background:#fff4d9}a{color:#167050}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}@media(max-width:650px){.grid{grid-template-columns:1fr}h1{font-size:28px}}</style>
+<header><small style="color:#d6f18b">真实程序 TRACE · 本地 APPLE VZ · 无 DOCKER</small><h1>让 Codex 改一次，再用仿真说话。</h1><p>使用你的 Codex CLI 和现有 ChatGPT 登录。只优化 L2 预取器：提前把可能要读的数据搬进缓存。</p></header>
+<section id="task-visual"><h2>一张图看懂：谁改什么，谁来判分？</h2>
+<style>
+.tv-flow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;gap:6px}.tv-box{padding:18px;border:1px solid #cbdacf;border-radius:12px;background:#f4f8f1}.tv-box b{display:block;font-size:19px}.tv-arrow{text-align:center;font-size:28px;color:#40725e}.tv-branch{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}.tv-branch>div{padding:18px;border-radius:12px;background:#edf3e8;border-top:4px solid #397655}.tv-branch>div:last-child{background:#fff5e4;border-color:#bd8537}.tv-bytes{display:grid;grid-template-columns:repeat(64,1fr);height:50px;border-radius:8px;overflow:hidden;margin:8px 0}.tv-bytes span{display:grid;place-items:center;color:#fff;border-right:1px solid white;font-size:12px;overflow:hidden}.tv-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}.tv-legend i{display:inline-block;width:12px;height:12px;margin-right:5px}.tv-time{display:flex;margin:18px 0;border-radius:8px;overflow:hidden}.tv-time>div{padding:16px 10px;text-align:center}.tv-table{overflow-x:auto}.tv-table table{min-width:620px}#task-visual details{border:1px solid #dce2d9;border-radius:12px;padding:14px;margin:14px 0}#task-visual summary{cursor:pointer;font-weight:600}#task-visual code{overflow-wrap:anywhere}@media(max-width:700px){.tv-flow{grid-template-columns:1fr}.tv-arrow{transform:rotate(90deg)}.tv-branch{grid-template-columns:1fr}.tv-time{font-size:12px}}
+</style>
+<div class="tv-flow"><div class="tv-box"><small>固定输入</small><b>程序的执行记录</b>trace + CPU 配置<br>原版预取器</div><div class="tv-arrow">→</div><div class="tv-box"><small>Codex 唯一修改区</small><b>L2 预取算法</b><code>ip_stride.cc / .h</code><br>猜接下来要读哪里</div><div class="tv-arrow">→</div><div class="tv-box"><small>独立测量</small><b>ChampSim 仿真</b>同样的记录分别回放<br>比较周期数与 IPC</div></div>
+<div class="tv-branch"><div><b>① 开发：允许看反馈再改</b><p>mcf / milc / libquantum → 测基线与候选 → 返回指标 → 下一次修改。</p><strong>最多 3 个候选</strong></div><div><b>② 验证：选好代码后再测</b><p>按开发成绩选候选 → 冻结代码 → 在 lbm 上测试 → 保存结论。</p><strong>只评估一次，不再根据结果改代码</strong></div></div>
+<p><b>输入里没有“性能答案”。</b>trace 描述执行过哪些指令、访问过哪些地址；缓存是否命中、等多少周期、IPC 多高，由模拟器计算。</p>
+<h3>trace 文件长什么样？</h3><div class="tv-flow"><div class="tv-box"><b>.champsimtrace.xz</b>XZ 压缩文件<br>用来节省存储空间</div><div class="tv-arrow">→</div><div class="tv-box"><b>解压后的二进制流</b>记录 1 | 记录 2 | 记录 3 …<br>本轮格式每条 64 字节</div><div class="tv-arrow">→</div><div class="tv-box"><b>一条执行过的指令</b>代码地址 + 跳转信息<br>寄存器 + 内存地址</div></div>
+<p>这不是 CSV 或 JSON。以下按本轮固定版本的标准 <code>input_instr</code> 布局说明，整数按小端解码；不适用于它的另一种 CloudSuite trace 格式。64 字节是<b>一条 trace 记录的长度</b>，不是说每次指令都读写 64 字节。</p>
+<small>每条记录的 64 字节布局（从左到右，块宽按字节数比例）</small>
+<div class="tv-bytes" aria-label="IP 8 字节，跳转标志 2 字节，寄存器编号 6 字节，写内存地址 16 字节，读内存地址 32 字节"><span style="grid-column:span 8;background:#235a48">IP</span><span style="grid-column:span 2;background:#ac6a2c" title="两个跳转标志"></span><span style="grid-column:span 6;background:#806497">寄存器</span><span style="grid-column:span 16;background:#437c9c">写地址 × 2</span><span style="grid-column:span 32;background:#56813b">读地址 × 4</span></div>
+<div class="tv-legend"><span><i style="background:#235a48"></i>指令地址 8 B</span><span><i style="background:#ac6a2c"></i>跳转标志 2 B</span><span><i style="background:#806497"></i>寄存器 6 B</span><span><i style="background:#437c9c"></i>写地址 16 B</span><span><i style="background:#56813b"></i>读地址 32 B</span></div>
+<div class="tv-table"><table><thead><tr><th>字节偏移</th><th>字段</th><th>类型 / 大小</th><th>人话解释</th></tr></thead><tbody>
+<tr><td>0–7</td><td><code>ip</code></td><td>uint64 · 8 B</td><td>这条指令在代码中的地址，区别于它读写的数据地址</td></tr>
+<tr><td>8</td><td><code>is_branch</code></td><td>uint8 · 1 B</td><td>是不是跳转指令</td></tr>
+<tr><td>9</td><td><code>branch_taken</code></td><td>uint8 · 1 B</td><td>这次有没有发生跳转</td></tr>
+<tr><td>10–11</td><td><code>destination_registers[2]</code></td><td>2 × uint8 · 2 B</td><td>写入哪些寄存器：存编号，不存数值</td></tr>
+<tr><td>12–15</td><td><code>source_registers[4]</code></td><td>4 × uint8 · 4 B</td><td>读取哪些寄存器：存编号，不存数值</td></tr>
+<tr><td>16–31</td><td><code>destination_memory[2]</code></td><td>2 × uint64 · 16 B</td><td>写入哪些内存地址：不含写入的数据内容</td></tr>
+<tr><td>32–63</td><td><code>source_memory[4]</code></td><td>4 × uint64 · 32 B</td><td>读取哪些内存地址：不含读到的数据内容</td></tr>
+</tbody></table></div>
+<details open><summary>展开一个容易看懂的例子</summary><p><b>人为构造的格式示意，不是本轮真实 trace 摘录。</b>下面把一条二进制记录转写成 JSON，方便阅读；实际文件里没有字段名和大括号。</p><pre>{
+  "ip": "0x400100",
+  "is_branch": 0,
+  "branch_taken": 0,
+  "destination_registers": [1, 0],
+  "source_registers": [2, 0, 0, 0],
+  "destination_memory": ["0x0", "0x0"],
+  "source_memory": ["0x800040", "0x0", "0x0", "0x0"]
+}</pre><p>意思是：代码位置 <code>0x400100</code> 的指令不是跳转；它依赖编号 2 的寄存器，产生编号 1 的寄存器结果，并读取数据地址 <code>0x800040</code>。空槽位用 0 表示。单靠这些字段不能还原完整机器指令或读到的数据值。</p></details>
+<details><summary>展开开发者解码方式</summary><pre>import lzma, struct
+record = struct.Struct('&lt;QBB2B4B2Q4Q')
+assert record.size == 64
+with lzma.open('example.champsimtrace.xz', 'rb') as f:
+    raw = f.read(64)
+    if len(raw) != 64:
+        raise ValueError('不完整的指令记录')
+    values = record.unpack(raw)
+    ip, is_branch, taken = values[:3]
+    dst_regs, src_regs = values[3:5], values[5:9]
+    dst_mem, src_mem = values[9:11], values[11:15]</pre><p><code>&lt;</code> 表示小端，<code>Q</code> 是 8 字节无符号整数，<code>B</code> 是 1 字节无符号整数。</p></details>
+<h3>哪些指令参与本轮评分？</h3><div class="tv-time"><div style="flex:10;background:#dfe8dc">前 100 万条<br><b>预热，不计分</b></div><div style="flex:20;background:#b6d39a">随后 200 万条<br><b>测量 IPC</b></div><div style="flex:1;background:#f1d4a0;min-width:58px">10 万条<br>读取余量</div></div><p>每个本地前缀共 310 万条记录，解压后为 198,400,000 字节（约 189.2 MiB）。图示为指令预算；模拟器停止时，最终完成数可能略超预算，评分采用日志中的实际计数。</p>
+<p><b>结果格式：</b>模拟器输出 JSON（指令数、周期数、缓存统计）；控制器计算 <code>IPC = 指令数 ÷ 周期数</code>，再生成当前 HTML 报告。Codex 改的是算法代码，trace 与评分规则保持固定。</p>
+<p><small>格式依据：项目锁定的 ChampSim 提交 <code>410cee62</code>，<code>inc/trace_instruction.h</code> 中的 <code>input_instr</code>。这是本轮实际使用的格式，不是所有 trace 的通用标准。</small></p>
+</section>
+
+<div class="grid"><div class="card"><small>开发预算</small><div class="big">最多 3 次</div>失败也占一次；不重置预算。</div><div class="card"><small>最终验证</small><div class="big">1 次</div>选好补丁才跑，结果不再用于修改。</div><div class="card"><small>每条 trace</small><div class="big">100 万 + 200 万</div>先预热，再测量；基线与候选各 3 遍。</div></div>
+<section id="workload-explainer"><h2>mcf / milc / libquantum / lbm 是什么？</h2><p>它们是 SPEC CPU2006 中的四个测试程序，不是评分指标。本轮使用这些程序的执行 trace，给模拟 CPU 提供不同的工作负载。</p><div style="overflow-x:auto"><table><thead><tr><th>程序</th><th>实际在算什么</th><th>通俗理解</th></tr></thead><tbody><tr><td><b>mcf</b></td><td>车辆调度中的组合优化问题</td><td>怎样安排车辆执行运输任务，让总成本更低。</td></tr><tr><td><b>milc</b></td><td>格点量子色动力学计算</td><td>把空间划成网格，研究夸克等粒子的相互作用。</td></tr><tr><td><b>libquantum</b></td><td>在普通计算机上模拟量子计算，运行 Shor 因数分解算法</td><td>用普通 CPU 模拟量子计算机分解整数。</td></tr><tr><td><b>lbm</b></td><td>用格子玻尔兹曼方法模拟三维不可压缩流体</td><td>把空间划成网格，计算流体如何流动。</td></tr></tbody></table></div><p><b>它们和 CPU 优化的关系：</b>四个程序提供不同的内存访问记录；被修改的是 ChampSim 中的 L2 缓存预取器 C++ 模型。我们比较同一份记录在原版与修改版上的模拟 IPC，没有修改这四个程序，也没有修改 CPU 的 RTL 硬件代码。</p><p>例如“libquantum +22.54%”，表示第 1 个候选在所选 libquantum 片段上的模拟 IPC 相对原版 ip_stride 提高了 22.54%，不是整个量子计算程序的实机加速成绩。</p><p><a href="https://www.spec.org/cpu2006/publications/sigarch-2007-03/00_cpu2006_intro.pdf">来源：SPEC 官方程序介绍</a></p></section>
+<section><h2>拿什么来测？</h2><p>直接使用 <a href="https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/">DPC-3 公布的 SPEC CPU trace</a>。trace 是程序执行记录；ChampSim 根据这些记录模拟 CPU、缓存和内存，不需要在 Mac 上重新编译 SPEC 程序。</p><table><tr><th>用途</th><th>固定文件</th></tr><tr><td>开发反馈</td><td>429.mcf-184B<br>433.milc-127B<br>462.libquantum-1343B</td></tr><tr><td>最终留出验证</td><td>470.lbm-1274B</td></tr></table><p>每个文件只取最前面的 310 万条完整记录，保留 10 万条读取余量；测量从预热后开始。保存源 URL、HTTP 元数据、下载前缀 hash、原始记录 hash 和缓存文件 hash。数据只存本机 .tools，不放进公开仓库。</p><div class="note">这是固定小子集的短窗口筛选，不是完整 SPEC CPU 成绩，也不是官方 DPC-3 比赛成绩。公开留出负载不是秘密测试；单个 lbm 结果不能代表所有程序。</div></section>
+<section><h2>谁负责什么？</h2><p class="flow">Codex 改代码 → VM 编译仿真 → 控制器核算 → 反馈下一次</p><p>Codex 只能修改 ip_stride.cc / ip_stride.h。控制器锁定 trace、指令数、CPU 配置与评分；沿用原版 ip_stride 作主基线，同时跑 no-prefetch 作参照。模型不能通过自己的文字声明判定成功。</p><p>选型规则预先固定：优先在“每个开发负载回退不超过 5%”的候选里选 IPC 比值几何平均最高者；没有候选满足时，保留有效候选中平均最高者，但必须报告未通过。成功门槛：几何平均至少 +1%，单项回退不超过 5%。</p></section>
+<section id="results"><h2>实测结果 · 3 次开发 + 1 次冻结验证</h2><p>第 1 次：保留重复访问间的规律，对稳定访问增加预取距离。第 2 次：增加重复预取过滤，未带来额外 IPC 收益。第 3 次：规律变化时取消旧预取，开发均值反而略降。因此选择第 1 个候选。</p><div style="overflow:auto"><table><tr><th>候选</th><th>mcf</th><th>milc</th><th>libquantum</th><th>几何平均</th><th>状态</th></tr><tr><td>第 1 次 · 选中</td><td>+0.00%</td><td>+0.29%</td><td>+22.54%</td><td><b>+7.11%</b></td><td>completed</td></tr><tr><td>第 2 次</td><td>+0.00%</td><td>+0.29%</td><td>+22.54%</td><td><b>+7.11%</b></td><td>completed</td></tr><tr><td>第 3 次</td><td>+0.00%</td><td>+0.29%</td><td>+22.16%</td><td><b>+7.00%</b></td><td>completed</td></tr></table></div><h3>冻结后验证：lbm +0.16%</h3><p>验证状态：completed；达到 +1% 且无超过 5% 回退的门槛：否。候选选择仅使用开发集结果；验证后没有再修改。</p><div class="grid"><div class="card"><small>开发集最佳</small><div class="big">+7.11%</div></div><div class="card"><small>冻结验证 · lbm</small><div class="big">+0.16%</div></div><div class="card"><small>保留候选</small><div class="big">第 1 次</div>第 2 次打平，第 3 次略低</div></div><p>这些数字是相对原版 ip_stride 的模拟 IPC 变化。一次短窗口结果只说明这次测量，不证明通用优化；所有结果都保留。</p><p><a href="benchmark/results.json">完整指标、版本、校验与模型用量</a> · <a href="benchmark/candidate-1.patch">候选 1 补丁</a> · <a href="benchmark/candidate-2.patch">候选 2 补丁</a> · <a href="benchmark/candidate-3.patch">候选 3 补丁</a></p></section>
+<section><h2>复现入口</h2><pre>.venv/bin/python scripts/fetch-dpc3.py
+.venv/bin/python scripts/install-dpc3.py
+# 仅首次创建实验；已有实验会拒绝重置
+.venv/bin/python scripts/start-codex-dpc3.py
+.venv/bin/python scripts/run-codex-dpc3.py</pre><p>固定任务参数：tasks/prefetch-dpc3/task.json；来源与校验：data-manifest.json。完整日志和模型事件保存在本机 .chipbench/codex-dpc3，各次仿真原始结果保存在 .chipbench/runs。</p><p><a href="v0.1-plan.html">第一版计划</a> · <a href="quickstart.html">使用说明</a> · <a href="initial-roadmap.html">原始路线图</a> · <a href="https://github.com/ChampSim/ChampSim">ChampSim</a> · <a href="https://learn.chatgpt.com/docs/non-interactive-mode">Codex 非交互运行</a></p></section></html>

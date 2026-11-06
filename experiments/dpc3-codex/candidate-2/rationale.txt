@@ -1,0 +1,5 @@
+Edited only `ip_stride.cc` and `ip_stride.h`.
+
+Retained candidate 1’s confidence-based degree 3/5 lookahead. Added a 16-entry duplicate filter with 32-cycle expiration to reduce redundant L2 prefetch requests while allowing later retries. Requests bypassing L2 are not recorded.
+
+Tracker remains 256 sets × 4 ways. No compilation or measurements run; performance awaits controller evaluation.

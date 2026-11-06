@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent for Chip Design｜个人开发者路线图</title>
+<style>
+:root{--bg:#f5f7fb;--paper:#fff;--ink:#172033;--muted:#647089;--line:#e5eaf2;--blue:#315efb;--cyan:#13a6a6;--green:#16865b;--amber:#b66b13;--soft:#edf2ff;--shadow:0 12px 34px rgba(24,42,79,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:34px 22px 64px}.hero{background:linear-gradient(120deg,#101d43,#2346a6 58%,#137e8b);color:white;border-radius:24px;padding:34px 38px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #ffffff24;border-radius:50%;right:-70px;top:-145px;box-shadow:0 0 0 35px #ffffff0d,0 0 0 75px #ffffff08}
+.kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#b8d6ff;font-weight:700}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.15;margin:12px 0}.hero p{max-width:730px;color:#dce7ff;margin:12px 0 0;font-size:16px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.chip{font-size:12px;padding:5px 10px;border:1px solid #ffffff44;border-radius:99px;color:#eff5ff}
+section{margin-top:30px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}.section-head h2{font-size:23px;margin:0}.section-head p{color:var(--muted);margin:0;font-size:13px}.lead{font-size:16px;color:#3d4961}
+.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;align-items:stretch}.step{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:13px 10px;min-height:122px;box-shadow:0 4px 16px #24395d08;position:relative}.step:not(:last-child):after{content:"›";position:absolute;right:-10px;top:42%;z-index:2;color:var(--blue);font-size:22px;font-weight:700}.num{font-size:11px;color:var(--blue);font-weight:800;letter-spacing:1px}.step b{display:block;font-size:14px;margin:5px 0}.step small{display:block;color:var(--muted);font-size:11px;line-height:1.45}
+.note{background:#fff8e9;border:1px solid #f3dfb8;color:#79521d;border-radius:12px;padding:12px 15px;font-size:13px;margin-top:13px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.card{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 5px 20px #24395d08}.card h3{margin:0 0 5px;font-size:17px}.sub{color:var(--muted);font-size:12px;margin-bottom:12px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.tool{background:#eef2ff;color:#2948a3;padding:5px 9px;border-radius:7px;font-size:12px;font-weight:650}.tool.green{background:#e8f6ef;color:#176b4b}.tool.gray{background:#f0f2f6;color:#536078}.card p{margin:7px 0;color:#46516a;font-size:13px}.metric{font-size:12px;color:#176b4b;background:#eff9f3;border-left:3px solid #27a36e;padding:7px 10px;border-radius:0 7px 7px 0}
+table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;font-size:13px;box-shadow:var(--shadow)}th{text-align:left;background:#edf1fa;color:#3c4964;font-size:12px}td,th{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}.pill{display:inline-block;border-radius:99px;padding:2px 8px;font-size:11px;background:#e9f7ef;color:#176b4b;font-weight:700}.pill.mid{background:#fff4e3;color:#986014}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.phase{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.phase .time{font-size:11px;color:var(--blue);font-weight:800;letter-spacing:1px}.phase h3{margin:6px 0;font-size:16px}.phase p{font-size:13px;color:#566078;margin:5px 0}.phase strong{color:#172033}
+.arch{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:9px;align-items:center}.archbox{background:white;border:1px solid var(--line);border-radius:13px;padding:13px;text-align:center}.archbox b{display:block;font-size:13px}.archbox small{color:var(--muted);font-size:11px}.arrow{color:var(--blue);font-size:21px}
+.footer{margin-top:28px;padding:17px 19px;background:#17233f;color:#dce5fa;border-radius:15px;font-size:13px}.footer b{color:white}.muted{color:var(--muted)}a{color:#315efb;text-decoration:none}a:hover{text-decoration:underline}.small{font-size:11px;color:var(--muted)}
+@media(max-width:850px){.flow{grid-template-columns:repeat(4,1fr)}.step:nth-child(4):after{display:none}.plan{grid-template-columns:1fr}.arch{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.grid{grid-template-columns:1fr}}
+@media(max-width:520px){.wrap{padding:16px 13px 40px}.hero{padding:25px 22px}.flow{grid-template-columns:repeat(2,1fr)}.step:nth-child(2n):after{display:none}.section-head{display:block}.section-head p{margin-top:4px}table{font-size:12px}td,th{padding:9px 8px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="hero">
+  <div class="kicker">Personal builder playbook · 2026</div>
+  <h1>Agent for Chip Design</h1>
+  <p>给个人开发者的一张路线图：先看懂芯片设计在做什么，再用开源工具搭出能跑、能测、能比较 Agent 能力的 Demo。第一年不买商业 EDA 授权。</p>
+  <div class="chips"><span class="chip">目标：研究 + 创业验证</span><span class="chip">软件预算：尽量 $0</span><span class="chip">先 Linux / Docker</span><span class="chip">Agent：Codex 等 Coding Agent</span></div>
+</header>
+
+<section>
+ <div class="section-head"><h2>01｜芯片设计到底在做什么？</h2><p>从“想做什么芯片”到“做出能工作的芯片”</p></div>
+ <p class="lead">可以把芯片设计理解成：先定功能和性能目标，再设计内部结构，写成硬件代码，反复验证，最后把逻辑变成真实的晶体管布局。</p>
+ <div class="flow">
+  <div class="step"><span class="num">01 · PLAN</span><b>架构设计</b><small>CPU / GPU / NPU 要做什么？性能、功耗、成本目标。</small></div>
+  <div class="step"><span class="num">02 · DESIGN</span><b>微架构设计</b><small>流水线、Cache、调度器、计算阵列怎么组织。</small></div>
+  <div class="step"><span class="num">03 · RTL</span><b>RTL 实现</b><small>用 Verilog / SystemVerilog 描述硬件电路。</small></div>
+  <div class="step"><span class="num">04 · VERIFY</span><b>验证与调试</b><small>仿真、测试、形式化检查，找出设计错误。</small></div>
+  <div class="step"><span class="num">05 · SYNTH</span><b>逻辑综合</b><small>把 RTL 转成标准单元组成的门级网表。</small></div>
+  <div class="step"><span class="num">06 · PHYSICAL</span><b>物理设计</b><small>布局、时钟树、布线，优化面积和时序。</small></div>
+  <div class="step"><span class="num">07 · SIGNOFF</span><b>签核与流片</b><small>时序、版图规则、电源完整性检查，准备制造。</small></div>
+ </div>
+ <div class="note"><b>别混为一谈：</b>gem5 / ChampSim 这类工具是在模拟“芯片架构表现”；Verilator / Yosys / OpenROAD 则能逐步验证和实现“硬件电路”。架构模拟跑得快，但不等于已经做出了可流片芯片。</div>
+</section>
+
+<section>
+ <div class="section-head"><h2>02｜每类任务用什么工具？</h2><p>优先选开源、可脚本化、能自动评分的工具</p></div>
+ <div class="grid">
+  <article class="card">
+   <h3>CPU / GPU / NPU 架构与微架构</h3><div class="sub">改算法或参数 → 跑 workload → 看性能变化</div>
+   <div class="tools"><span class="tool green">ChampSim</span><span class="tool green">gem5</span><span class="tool green">Ramulator 2</span><span class="tool">Accel-Sim / GPGPU-Sim</span><span class="tool">SCALE-Sim</span></div>
+   <p><b>典型任务：</b>Cache / Prefetcher、分支预测、CPU 参数、GPU 调度、NPU 数据流优化。</p>
+   <div class="metric">评估：IPC、MPKI、延迟、吞吐、带宽、能耗估算。</div>
+   <p class="small">入门先用 ChampSim；gem5 更全面但更重。GPU 模拟器安装和校准成本较高，放第二阶段。</p>
+  </article>
+  <article class="card">
+   <h3>CPU / SoC RTL 设计</h3><div class="sub">改真实硬件描述 → 编译、仿真、验证</div>
+   <div class="tools"><span class="tool green">Verilator</span><span class="tool green">cocotb</span><span class="tool green">GTKWave</span><span class="tool">Chisel</span><span class="tool">Chipyard / BOOM / Ibex</span></div>
+   <p><b>典型任务：</b>生成或修改 Verilog、实现模块、修复 Bug、集成总线和 IP。</p>
+   <div class="metric">评估：测试通过率、功能覆盖率、仿真时间、资源消耗。</div>
+   <p class="small">先用 Ibex 等较小设计做 Demo；BOOM / Chipyard 更适合后续做复杂 CPU。</p>
+  </article>
+  <article class="card">
+   <h3>功能验证 / 形式化验证</h3><div class="sub">生成测试 → 找 Bug → 修复 → 回归</div>
+   <div class="tools"><span class="tool green">Verilator</span><span class="tool green">cocotb</span><span class="tool green">Yosys</span><span class="tool green">SymbiYosys</span><span class="tool">GTKWave</span></div>
+   <p><b>典型任务：</b>Testbench 生成、RTL Debug、断言检查、等价性验证。</p>
+   <div class="metric">评估：隐藏测试通过率、Bug 修复率、覆盖率、证明结果。</div>
+  </article>
+  <article class="card">
+   <h3>综合 / 物理设计 / PPA</h3><div class="sub">RTL → 网表 → 布局布线 → 指标反馈</div>
+   <div class="tools"><span class="tool green">Yosys + ABC</span><span class="tool green">OpenROAD</span><span class="tool green">OpenSTA</span><span class="tool">SKY130 / GF180 PDK</span></div>
+   <p><b>典型任务：</b>综合参数优化、Floorplan、Placement、CTS、Routing、时序修复。</p>
+   <div class="metric">评估：面积、WNS / TNS、线长、拥塞、功耗估算、DRC。</div>
+   <p class="small">OpenROAD Flow Scripts 可串起较完整的 RTL-to-GDS 流程；结果受 PDK、约束和设计规模影响。</p>
+  </article>
+  <article class="card">
+   <h3>模拟 / 混合信号电路</h3><div class="sub">改电路参数 → SPICE 仿真 → 读性能指标</div>
+   <div class="tools"><span class="tool green">ngspice</span><span class="tool green">Xschem</span><span class="tool">Python / SciPy</span><span class="tool">Magic / Netgen</span></div>
+   <p><b>典型任务：</b>运放、滤波器、振荡器等电路参数优化和鲁棒性分析。</p>
+   <div class="metric">评估：增益、带宽、相位裕度、功耗、噪声、PVT 表现。</div>
+  </article>
+  <article class="card">
+   <h3>系统级 / 软件工作负载验证</h3><div class="sub">把芯片放进软件场景，看真实任务表现</div>
+   <div class="tools"><span class="tool green">gem5</span><span class="tool">RISC-V toolchain</span><span class="tool">Linux / benchmarks</span><span class="tool">QEMU（功能执行）</span></div>
+   <p><b>典型任务：</b>跑程序、分析瓶颈、比较配置、验证系统性能。</p>
+   <div class="metric">评估：运行时间、吞吐、启动成功率、性能回归。</div>
+  </article>
+ </div>
+</section>
+
+<section>
+ <div class="section-head"><h2>03｜建议先搭的“零商业授权”工具栈</h2><p>不要一次装完所有东西，先跑通两条闭环</p></div>
+ <table>
+  <thead><tr><th>优先级</th><th>环境 / 工具</th><th>先做出的 Demo</th><th>为什么先做</th></tr></thead>
+  <tbody>
+   <tr><td><span class="pill">P0</span></td><td><b>ChampSim</b> + C++ + Python</td><td>Agent 改 Prefetcher，在固定 trace 上优化 IPC / MPKI。</td><td>任务边界清楚、运行快、结果易比较，适合第一个 Agent Benchmark。</td></tr>
+   <tr><td><span class="pill">P0</span></td><td><b>Verilator + cocotb</b></td><td>给一个带 Bug 的 RTL 模块，让 Agent 修复并通过隐藏测试。</td><td>自动判分直接，容易做出可复现任务集。</td></tr>
+   <tr><td><span class="pill">P1</span></td><td><b>Yosys + OpenROAD + OpenSTA + SKY130</b></td><td>给定 RTL 和约束，跑综合及物理实现，比较 PPA。</td><td>体现真正 EDA 流程，但运行资源、PDK 和流程调试更复杂。</td></tr>
+   <tr><td><span class="pill mid">P1</span></td><td><b>gem5 + Ramulator 2</b></td><td>修改 CPU / 内存配置，跑选定 workload 并比较性能。</td><td>更接近系统级架构研究，适合第二批任务。</td></tr>
+   <tr><td><span class="pill mid">P2</span></td><td><b>SCALE-Sim / Accel-Sim</b></td><td>探索 NPU 数据流或 GPU 微架构参数。</td><td>产业相关性强，但先确认依赖、模型和校准成本。</td></tr>
+   <tr><td><span class="pill mid">P2</span></td><td><b>Xschem + ngspice</b></td><td>Agent 优化一个运放或滤波器电路指标。</td><td>补充模拟电路方向，不必作为第一版主线。</td></tr>
+  </tbody>
+ </table>
+ <div class="note"><b>零成本不等于零条件：</b>开源软件通常可免费使用，但每个仓库、依赖、PDK、benchmark trace 和设计数据都有自己的许可证。商用前逐项审查；不要把受限的 SPEC、厂商 PDK 或商业工具数据打包分发。</div>
+</section>
+
+<section>
+ <div class="section-head"><h2>04｜把工具变成 Agent 能用的环境</h2><p>重点不是做一堆 MCP，而是做可复现的任务闭环</p></div>
+ <div class="arch">
+  <div class="archbox"><b>Agent</b><small>Codex / 其他 Coding Agent</small></div><div class="arrow">→</div>
+  <div class="archbox"><b>统一接口</b><small>CLI / Python SDK / MCP</small></div><div class="arrow">→</div>
+  <div class="archbox"><b>Environment</b><small>任务、状态、运行、日志、预算</small></div>
+ </div>
+ <div class="flow" style="grid-template-columns:repeat(5,1fr);margin-top:12px">
+  <div class="step"><span class="num">INPUT</span><b>任务规格</b><small>目标、约束、初始设计</small></div>
+  <div class="step"><span class="num">ACTION</span><b>Agent 修改</b><small>代码、参数、配置</small></div>
+  <div class="step"><span class="num">RUN</span><b>调用工具</b><small>仿真 / 编译 / 综合</small></div>
+  <div class="step"><span class="num">OBSERVE</span><b>结构化反馈</b><small>日志、指标、失败原因</small></div>
+  <div class="step"><span class="num">EVAL</span><b>独立评分</b><small>隐藏测试、性能、成本</small></div>
+ </div>
+ <p class="lead" style="margin-top:14px">每个任务都要能 reset、run、inspect、evaluate。评估器要独立于 Agent，避免 Agent 自己报告“我成功了”。</p>
+</section>
+
+<section>
+ <div class="section-head"><h2>05｜个人开发者的 90 天计划</h2><p>先有能演示的闭环，再谈平台化</p></div>
+ <div class="plan">
+  <div class="phase"><div class="time">WEEK 1–2</div><h3>跑通一个工具</h3><p><strong>选 ChampSim。</strong>编译、运行官方示例，确认结果稳定；建立一个 baseline 和结果解析脚本。</p></div>
+  <div class="phase"><div class="time">WEEK 3–6</div><h3>做出 Agent Demo</h3><p>让 Agent 修改 Prefetcher，自动运行实验、记录配置和指标；加入超时、资源限制、重复运行。</p></div>
+  <div class="phase"><div class="time">WEEK 7–12</div><h3>做成可评测产品</h3><p>加入 RTL Debug 环境、隐藏测试、统一任务格式和排行榜；比较不同 Agent 的成功率、成本和耗时。</p></div>
+ </div>
+</section>
+
+<section>
+ <div class="section-head"><h2>06｜创业切入点：先卖“评测能力”，不是卖仿真器</h2></div>
+ <div class="grid">
+  <div class="card"><h3>第一阶段：开发者工具</h3><p>开源任务集 + 本地 Runner + 结果报告。让芯片团队能测 Coding Agent 是否真的会改设计、跑仿真、提升指标。</p></div>
+  <div class="card"><h3>第二阶段：团队评测平台</h3><p>私有 RTL / workload 接入、隔离执行、许可证与算力调度、Agent 横向比较、回归追踪。</p></div>
+ </div>
+ <div class="note"><b>建议的首个产品定位：</b>“面向芯片设计任务的 Agent Evaluation & Execution Platform”。先聚焦一个窄场景（例如 Prefetcher 优化或 RTL Bug 修复），把任务、运行和评分做扎实，再扩展到完整 EDA flow。</div>
+</section>
+
+<footer class="footer">
+ <b>一句话路线：</b>先用 ChampSim 做 CPU 微架构优化 Demo，再用 Verilator + cocotb 做 RTL 验证 Demo，最后接入 OpenROAD 做真实 PPA 流程。<br>
+ <span style="color:#b9c7e4">商业软件（Cadence / Synopsys / Siemens）先不买；等有明确客户需求，再谈评估授权、合作许可和商业部署条款。</span>
+</footer>
+<p class="small" style="margin-top:14px">说明：工具和项目为建议选型，不代表对所有版本、PDK、数据集或依赖的商业许可作保证。正式商业化前，请核对各项目 LICENSE、第三方依赖、工艺数据及 benchmark 数据授权。</p>
+</main></body></html>
