@@ -9,7 +9,8 @@ from process import run
 
 with tempfile.TemporaryDirectory() as tmp:
     marker = Path(tmp) / "late-result"
-    child = f"import time; from pathlib import Path; time.sleep(1); Path({str(marker)!r}).write_text('escaped')"
+    started = Path(tmp) / "child-started"
+    child = f"import time; from pathlib import Path; Path({str(started)!r}).touch(); time.sleep(1); Path({str(marker)!r}).write_text('escaped')"
     parent = f"import subprocess,sys,time; subprocess.Popen([sys.executable,'-c',{child!r}]); time.sleep(10)"
     timed_out = False
     try:
@@ -17,8 +18,8 @@ with tempfile.TemporaryDirectory() as tmp:
     except subprocess.TimeoutExpired:
         timed_out = True
     time.sleep(1.2)
-    result = dict(name="timeout-process-group", status="passed" if timed_out and not marker.exists() else "failed",
-                  timeout_detected=timed_out, child_wrote_late_result=marker.exists())
+    result = dict(name="timeout-process-group", status="passed" if timed_out and started.exists() and not marker.exists() else "failed",
+                  timeout_detected=timed_out, child_started=started.exists(), child_wrote_late_result=marker.exists())
     out = Path(__file__).resolve().parent / "results"
     out.mkdir(exist_ok=True)
     (out / "timeout-results.json").write_text(json.dumps(result, indent=2))

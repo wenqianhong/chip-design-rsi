@@ -3,7 +3,7 @@
 import json,subprocess,time
 from pathlib import Path
 from process import run
-root=Path('/home/wenqianhong.guest/chipbench-modules')
+root=Path(__file__).resolve().parent
 out=root/'results';out.mkdir(exist_ok=True)
 results=[]
 def check(name,args,cwd,timeout=300,expect=0,contains=None):

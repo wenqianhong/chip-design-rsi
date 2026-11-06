@@ -8,18 +8,18 @@ GUEST='/home/wenqianhong.guest/chipbench-modules'
 OUT=ROOT/'.chipbench/modules'
 def call(args,**kwargs):return subprocess.run(args,check=True,**kwargs)
 def shell(*args):return call([LIMA,'shell','--workdir=/tmp',VM,*args])
-p=argparse.ArgumentParser();p.add_argument('command',choices=['status','logic','drc','mapping','physical','timeout','collect']);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('command',choices=['status','logic','drc','mapping','physical','layout','timeout','collect']);a=p.parse_args()
 OUT.mkdir(parents=True,exist_ok=True)
 if a.command=='status':
  call([LIMA,'list','--json',VM])
  for name in ['logic-results.json','physical-results.json','drc-results.json','mapping-results.json','timeout-results.json']:
   path=OUT/'results'/name
   if path.exists():print(path.read_text())
-elif a.command in ['logic','drc','mapping','physical','timeout']:
+elif a.command in ['logic','drc','mapping','physical','layout','timeout']:
  call([LIMA,'start',VM,'--tty=false'])
  call([LIMA,'copy',str(ROOT/'environments/modules/process.py'),VM+':'+GUEST+'/process.py'])
  if a.command!='logic':
-  names={'drc':['drc_fixtures.py','run_drc.py'],'mapping':['run_mapping.py'],'physical':['physical.tcl','run_physical.py'],'timeout':['check_timeout.py']}[a.command]
+  names={'drc':['drc_fixtures.py','run_drc.py'],'mapping':['run_mapping.py'],'physical':['physical.tcl','run_physical.py'],'layout':['stream_layout.py','run_layout.py'],'timeout':['check_timeout.py']}[a.command]
   for name in names:
    call([LIMA,'copy',str(ROOT/'environments/modules'/name),VM+':'+GUEST+'/'+name])
   shell('python3',GUEST+'/'+names[-1])
