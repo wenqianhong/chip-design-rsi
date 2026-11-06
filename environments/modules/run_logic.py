@@ -2,6 +2,7 @@
 """Independent module acceptance in Linux; no model or benchmark optimization."""
 import json,subprocess,time
 from pathlib import Path
+from process import run
 root=Path('/home/wenqianhong.guest/chipbench-modules')
 out=root/'results';out.mkdir(exist_ok=True)
 results=[]
@@ -9,7 +10,7 @@ def check(name,args,cwd,timeout=300,expect=0,contains=None):
  log=out/(name+'.log');start=time.monotonic();status='failed';code=None
  try:
   with log.open('w') as f:
-   proc=subprocess.run(args,cwd=cwd,stdout=f,stderr=subprocess.STDOUT,timeout=timeout)
+   proc=run(args,cwd=cwd,stdout=f,stderr=subprocess.STDOUT,timeout=timeout)
   code=proc.returncode;output=log.read_text(errors='replace')
   ok=(code==0 if expect==0 else code!=0) and (contains is None or contains in output)
   status='passed' if ok else 'failed'

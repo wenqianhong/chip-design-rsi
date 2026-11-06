@@ -1,0 +1,2 @@
+COUNTER_PASS checks=3
+/home/wenqianhong.guest/chipbench-modules/fixtures/counter_tb.sv:14: $finish called at 2650 (1s)

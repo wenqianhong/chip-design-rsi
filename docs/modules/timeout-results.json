@@ -1,0 +1,6 @@
+{
+  "name": "timeout-process-group",
+  "status": "passed",
+  "timeout_detected": true,
+  "child_wrote_late_result": false
+}

@@ -15,11 +15,17 @@
     "openroad": "f131605002c80444f79b18e95e0c7cb657ec024d"
   },
   "fixture_sha256": {
+    "environments/modules/provision.sh": "444ffbea52d69cf5d7642aa7b7e7eb95f6270fd266853455e9a2e2dee72eff49",
     "environments/modules/drc_fixtures.py": "4b0a140b4a88bc2b78c9d67a056694d4492450fccd2b363afdd3079d3a0fbe35",
     "environments/modules/counter_tb.sv": "19dff8840c444f3b5013589c519af447f9b70c2570e4cb502bedf89e27fe0fd6",
-    "environments/modules/run_logic.py": "9175f92e5671d65551dd50019ce39fd8b8d34e18443567b21184fb0992046b92",
-    "environments/modules/run_drc.py": "af9aa5f9596a1d642a07444c4be65b69cf178a699b5ad7fbc44e3cf6fd942647",
-    "environments/modules/counter.sv": "ae677eb7e97dbba32f19a5f650d206c5e2584356d8ba26c84c2c4d16292370f6"
+    "environments/modules/run_logic.py": "4cd8ef0d86ffeba304232fb467e9b52eb8aaf0202e00819a1f3c7b31b75be700",
+    "environments/modules/process.py": "1a2d308fdcefda11e0f08994094a2df792d0d0ef9713dc1291dd483673d6bec5",
+    "environments/modules/run_drc.py": "4185ac4703ffaeab44ba900453051f9f90bde44900709e463a58c9f4b0942041",
+    "environments/modules/run_physical.py": "b38d277b4bc1a1d45807aeea9b8066d3c088997dc5e14fa22d9816d0db8bd275",
+    "environments/modules/run_mapping.py": "7341e4339be87de351b183f4c4f7309bbc971909c25f1dba621198b0ad610f5f",
+    "environments/modules/physical.tcl": "97abf8181031774c72d41955e950052d1cf623418ce98ede39839ea0a2dba38a",
+    "environments/modules/counter.sv": "ae677eb7e97dbba32f19a5f650d206c5e2584356d8ba26c84c2c4d16292370f6",
+    "environments/modules/check_timeout.py": "d2de4252730e4ac939b59426a958ff54ea4b5e7e7c26118252e4689acb450eb1"
   },
   "limits": [
     "Independent module checks, not an integrated CPU pipeline",

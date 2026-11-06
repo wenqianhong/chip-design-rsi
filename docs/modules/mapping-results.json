@@ -1,0 +1,49 @@
+[
+  {
+    "name": "cell-models",
+    "status": "passed",
+    "command": [
+      "yosys",
+      "-p",
+      "read_liberty -ignore_miss_func /home/wenqianhong.guest/chipbench-modules/orfs/tools/OpenROAD/test/Nangate45/Nangate45_typ.lib; write_verilog -noattr /home/wenqianhong.guest/chipbench-modules/results/nangate_models.v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.065
+  },
+  {
+    "name": "cell-mapping",
+    "status": "passed",
+    "command": [
+      "yosys",
+      "-p",
+      "read_verilog /home/wenqianhong.guest/chipbench-modules/fixtures/counter.sv; synth -top counter; dfflibmap -liberty /home/wenqianhong.guest/chipbench-modules/orfs/tools/OpenROAD/test/Nangate45/Nangate45_typ.lib; abc -liberty /home/wenqianhong.guest/chipbench-modules/orfs/tools/OpenROAD/test/Nangate45/Nangate45_typ.lib; clean; read_liberty -lib /home/wenqianhong.guest/chipbench-modules/orfs/tools/OpenROAD/test/Nangate45/Nangate45_typ.lib; check -assert; stat -liberty /home/wenqianhong.guest/chipbench-modules/orfs/tools/OpenROAD/test/Nangate45/Nangate45_typ.lib; write_verilog -noattr /home/wenqianhong.guest/chipbench-modules/results/counter_mapped.v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.27
+  },
+  {
+    "name": "mapped-compile",
+    "status": "passed",
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-o",
+      "/home/wenqianhong.guest/chipbench-modules/results/mapped.vvp",
+      "/home/wenqianhong.guest/chipbench-modules/results/counter_mapped.v",
+      "/home/wenqianhong.guest/chipbench-modules/results/nangate_models.v",
+      "/home/wenqianhong.guest/chipbench-modules/fixtures/counter_tb.sv"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.016
+  },
+  {
+    "name": "mapped-simulation",
+    "status": "passed",
+    "command": [
+      "vvp",
+      "/home/wenqianhong.guest/chipbench-modules/results/mapped.vvp"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.008
+  }
+]

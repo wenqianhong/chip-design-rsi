@@ -4,6 +4,7 @@ import subprocess
 import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from process import run
 
 root = Path(__file__).resolve().parent
 out = root / "results"
@@ -17,7 +18,7 @@ for name in ["metal_good", "metal_bad"]:
             "-rd", f"report_file={report}"]
     started = time.monotonic()
     with (out / (name + ".log")).open("w") as log:
-        proc = subprocess.run(args, stdout=log, stderr=subprocess.STDOUT, timeout=120)
+        proc = run(args, stdout=log, stderr=subprocess.STDOUT, timeout=120)
     categories = []
     if report.exists():
         categories = [i.findtext("category", "") for i in ET.parse(report).findall(".//items/item")]
