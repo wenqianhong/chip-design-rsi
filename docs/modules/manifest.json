@@ -15,7 +15,8 @@
     "openroad": "f131605002c80444f79b18e95e0c7cb657ec024d"
   },
   "fixture_sha256": {
-    "environments/modules/provision.sh": "b841117ab28fa23d1f15a2b24431bbf23c15396e0eda2fb3d54f155a905c43b2",
+    "environments/modules/provision.sh": "28fc421331d769e34f28bef6b98c314be93e7ac57f04bdce3c652caa84248bc6",
+    "environments/modules/openroad-arm64.patch": "5f1bc3f2dc1528d0c2a41ba5e2e4cc8ae2baf434209bed5ab01d70e600f34a1d",
     "environments/modules/drc_fixtures.py": "4b0a140b4a88bc2b78c9d67a056694d4492450fccd2b363afdd3079d3a0fbe35",
     "environments/modules/counter_tb.sv": "19dff8840c444f3b5013589c519af447f9b70c2570e4cb502bedf89e27fe0fd6",
     "environments/modules/run_logic.py": "1536ea87150d9409f6f1c91ed3d8002b94dfa74e1b2eb8028d84ededd48ca72a",
@@ -34,5 +35,6 @@
     "Independent module checks, not an integrated CPU pipeline",
     "No model invocation",
     "Physical modules not yet accepted"
-  ]
+  ],
+  "openroad_patch": "environments/modules/openroad-arm64.patch"
 }

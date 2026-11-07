@@ -61,6 +61,7 @@ elif args.command == 'setup':
     guest = guest_root()
     shell('mkdir', '-p', guest + '/fixtures', guest + '/results')
     copy('provision.sh', guest + '/provision.sh')
+    copy('openroad-arm64.patch', guest + '/openroad-arm64.patch')
     proxy = os.environ.get('CHIPBENCH_BUILD_PROXY', '')
     env = ['http_proxy=' + proxy, 'https_proxy=' + proxy] if proxy else []
     shell('env', *env, 'bash', guest + '/provision.sh')

@@ -20,6 +20,10 @@ git -C "$ROOT_DIR/orfs" submodule update --init tools/OpenROAD
 test "$(git -C "$ROOT_DIR/orfs/tools/OpenROAD" rev-parse HEAD)" = "$OPENROAD_REV"
 git -C "$ROOT_DIR/orfs/tools/OpenROAD" submodule update --init
 cd "$ROOT_DIR/orfs/tools/OpenROAD"
+if ! git apply --reverse --check "$ROOT_DIR/openroad-arm64.patch" 2>/dev/null; then
+  git apply --check "$ROOT_DIR/openroad-arm64.patch"
+  git apply "$ROOT_DIR/openroad-arm64.patch"
+fi
 sudo -E bash etc/DependencyInstaller.sh -all
 bazelisk build --jobs=32 --local_resources=cpu=4 --local_resources=memory=8192 --config=release --//:platform=cli //:openroad
 bazelisk run --jobs=32 --local_resources=cpu=4 --local_resources=memory=8192 --config=release --//:platform=cli //:install -- "$ROOT_DIR/tools"
