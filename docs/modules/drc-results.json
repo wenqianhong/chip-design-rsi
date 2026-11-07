@@ -15,7 +15,7 @@
       "-rd",
       "report_file=/home/wenqianhong.guest/chipbench-modules/results/metal_good.lyrdb"
     ],
-    "elapsed_seconds": 0.785
+    "elapsed_seconds": 1.072
   },
   {
     "name": "metal_bad",
@@ -35,6 +35,6 @@
       "-rd",
       "report_file=/home/wenqianhong.guest/chipbench-modules/results/metal_bad.lyrdb"
     ],
-    "elapsed_seconds": 0.749
+    "elapsed_seconds": 1.072
   }
 ]

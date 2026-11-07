@@ -1,0 +1,5 @@
+[INFO] Reporting cells prior to loading DEF ...
+	/home/wenqianhong.guest/chipbench-modules/orfs/flow/platforms/nangate45/gds/NangateOpenCellLibrary.gds
+[INFO] All LEF cells have matching GDS/OAS cells
+[INFO] No orphan cells in the final layout
+GDS_PASS top=gcd cells=58 bbox=(0,0;1001300,1008000)

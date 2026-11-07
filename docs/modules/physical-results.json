@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "checks": {
+    "process": true,
+    "fully_routed": true,
+    "routing_drc": true,
+    "antenna": true,
+    "constraints": true,
+    "relaxed_setup": true,
+    "tight_setup_detected": true,
+    "routed_def": true,
+    "extracted_spef": true,
+    "global_place_checkpoint": true,
+    "cts_checkpoint": true,
+    "dpl_checkpoint": true,
+    "route_checkpoint": true,
+    "fill_checkpoint": true
+  },
+  "values": {
+    "ROUTED": "1",
+    "DRC": "0",
+    "ANTENNA": "0",
+    "CONSTRAINTS": "1",
+    "RELAXED_SETUP": "1.4851300609656786",
+    "TIGHT_SETUP": "-0.5048699934352511"
+  },
+  "exit_code": 0,
+  "command": [
+    "/home/wenqianhong.guest/chipbench-modules/orfs/tools/OpenROAD/bazel-bin/openroad",
+    "-exit",
+    "-no_init",
+    "-threads",
+    "4",
+    "-metrics",
+    "/home/wenqianhong.guest/chipbench-modules/results/physical/metrics.json",
+    "/home/wenqianhong.guest/chipbench-modules/physical.tcl"
+  ],
+  "elapsed_seconds": 3.486,
+  "artifacts": {
+    "gcd_nangate45_route_drc-tcl.rpt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "gcd_nangate45_output_guide-tcl.mod": {
+      "bytes": 100042,
+      "sha256": "4104daebb3a2a76b29a22743311b732d826d6e0115119ea0854c882796827713"
+    },
+    "gcd_nangate45_dpl-tcl.db": {
+      "bytes": 662425,
+      "sha256": "fda286454e36ea1e5618f7b7c93ea4262715a1bfdce79e5bd2374a608f9b930d"
+    },
+    "gcd_nangate45_cts-tcl.db": {
+      "bytes": 652910,
+      "sha256": "7af62587252f6afea0806444bdcbcfaa54ecb52bc44c619241d0f3ff5f7aedd1"
+    },
+    "gcd_nangate45_route-tcl.def": {
+      "bytes": 300294,
+      "sha256": "fa14ab772085b2a6a4f9b85ab9b4d135f07c315f71b303dc418ca6f4b525462c"
+    },
+    "gcd_nangate45_global_place-tcl.db": {
+      "bytes": 648961,
+      "sha256": "9602eed6a2e31ba427495e9c93c77fbfe9a3330f8e8d0ade7b9512a2bf48b8c1"
+    },
+    "gcd_nangate45_route-tcl.db": {
+      "bytes": 1074229,
+      "sha256": "b53cf09b55e5f66099bf7ce1b4f934bd3810c2ce9420a9acb68fa0f15dcce4c2"
+    },
+    "final.def": {
+      "bytes": 296365,
+      "sha256": "5c8803015f0ece4da2998ce7158ef07f47495a8242b6d6d5c7cde08f7201bbf8"
+    },
+    "metrics.json": {
+      "bytes": 5264,
+      "sha256": "d8cc10ad2877d379180f22b89b7d509dc73c4c61c09e792fa82e6b186a67debe"
+    },
+    "gcd_nangate45-tcl.v": {
+      "bytes": 37887,
+      "sha256": "5794ac898a4db29ff4203bf994e01d035165618e71c804ae860099bd5cb704c8"
+    },
+    "gcd_nangate45-tcl.route_guide": {
+      "bytes": 100042,
+      "sha256": "4104daebb3a2a76b29a22743311b732d826d6e0115119ea0854c882796827713"
+    },
+    "gcd_nangate45-tcl.spef": {
+      "bytes": 289332,
+      "sha256": "c2c19574477c3ab0f5eeb4066978651cdfb8f1ffa6cd754ffa4ee44c6e8a7fdf"
+    },
+    "flow.log": {
+      "bytes": 47838,
+      "sha256": "6c188c4f5a920d97fd8f2e95c16a3ac2f0ef0f122c01c60ab8ba6000caba5bd0"
+    },
+    "gcd_nangate45_repaired_route-tcl.odb": {
+      "bytes": 1074229,
+      "sha256": "b53cf09b55e5f66099bf7ce1b4f934bd3810c2ce9420a9acb68fa0f15dcce4c2"
+    },
+    "gcd_nangate45_fill-tcl.db": {
+      "bytes": 1384421,
+      "sha256": "14cc60cb89d79a74d42c6d3a7367e0bee22bd06e48e8f7882b905af9473751ab"
+    },
+    "final.v": {
+      "bytes": 80927,
+      "sha256": "b3c6857250a7b0f1bc539f2ea3dac87c1e62372ea16e143d2d9ed44d5ae3f230"
+    }
+  }
+}

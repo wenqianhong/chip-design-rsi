@@ -16,6 +16,8 @@ if out.exists():
 out.mkdir(parents=True, exist_ok=True)
 source = root / "orfs/tools/OpenROAD"
 exe = root / "tools/bin/openroad"
+if not exe.exists():
+    exe = source / "bazel-bin/openroad"
 args = [str(exe), "-exit", "-no_init", "-threads", "4", "-metrics", str(out / "metrics.json"), str(root / "physical.tcl")]
 start = time.monotonic()
 try:

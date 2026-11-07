@@ -16,7 +16,7 @@ RUNNERS = {
     'drc': ['drc_fixtures.py', 'run_drc.py'],
     'mapping': ['run_mapping.py'],
     'physical': ['physical.tcl', 'run_physical.py'],
-    'layout': ['stream_layout.py', 'run_layout.py'],
+    'layout': ['stream_layout.py', 'render_layout.py', 'run_layout.py'],
     'timeout': ['check_timeout.py'],
 }
 

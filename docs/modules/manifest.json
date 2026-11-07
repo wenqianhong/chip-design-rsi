@@ -1,5 +1,5 @@
 {
-  "status": "in_progress",
+  "status": "module_acceptance_complete_with_limitations",
   "vm": {
     "name": "chipbench-modules",
     "backend": "Apple VZ",
@@ -17,14 +17,15 @@
   "fixture_sha256": {
     "environments/modules/provision.sh": "28fc421331d769e34f28bef6b98c314be93e7ac57f04bdce3c652caa84248bc6",
     "environments/modules/openroad-arm64.patch": "5f1bc3f2dc1528d0c2a41ba5e2e4cc8ae2baf434209bed5ab01d70e600f34a1d",
+    "environments/modules/render_layout.py": "d130718cb39e6aa009122b07a53c0040c3e1190dcda518e1d9a94fe4cf8c54d3",
     "environments/modules/drc_fixtures.py": "4b0a140b4a88bc2b78c9d67a056694d4492450fccd2b363afdd3079d3a0fbe35",
     "environments/modules/counter_tb.sv": "19dff8840c444f3b5013589c519af447f9b70c2570e4cb502bedf89e27fe0fd6",
     "environments/modules/run_logic.py": "1536ea87150d9409f6f1c91ed3d8002b94dfa74e1b2eb8028d84ededd48ca72a",
-    "environments/modules/run_layout.py": "c1c6f3fcc44713900820ee973b1b603126f4e248813026c4cb51dc5ca62bd910",
+    "environments/modules/run_layout.py": "0a464ed995d0302364f1c651d2d8003ff1bec72ed4dc5dc94c2116626e4cc02b",
     "environments/modules/process.py": "1a2d308fdcefda11e0f08994094a2df792d0d0ef9713dc1291dd483673d6bec5",
     "environments/modules/stream_layout.py": "c19909c25ce1ef6c8d5d87a339a3148c4a2079e86d62a7717b080223e89d9dd1",
     "environments/modules/run_drc.py": "4185ac4703ffaeab44ba900453051f9f90bde44900709e463a58c9f4b0942041",
-    "environments/modules/run_physical.py": "dbd2d1e8cede0457da50526d746296491eb64edfb9d93db3c7c10d197328de70",
+    "environments/modules/run_physical.py": "887aad99ccb0e23c01dec315a93b81e39a83dd889cc3832af0efe32522e77252",
     "environments/modules/run_mapping.py": "7341e4339be87de351b183f4c4f7309bbc971909c25f1dba621198b0ad610f5f",
     "environments/modules/physical.tcl": "a0f7094fcb32941b2a919f09de7cb029758222de6366348aa5d6ed5fded4eccb",
     "environments/modules/counter.sv": "ae677eb7e97dbba32f19a5f650d206c5e2584356d8ba26c84c2c4d16292370f6",
@@ -32,9 +33,12 @@
     "environments/modules/lima.yaml": "fe75cbb2cc4bc10f65d46d614b7ead4aecf3ec3c5a5f78a66a174228c12afa81"
   },
   "limits": [
-    "Independent module checks, not an integrated CPU pipeline",
+    "Independent samples, not a single integrated CPU pipeline",
     "No model invocation",
-    "Physical modules not yet accepted"
+    "Nangate45 LVS unsupported: no deck provided in pinned platform",
+    "Original GCD 0.485 ns clock has setup slack -0.029869968 ns; module execution passes, original timing target fails",
+    "Educational FreePDK45 DRC, not foundry signoff"
   ],
-  "openroad_patch": "environments/modules/openroad-arm64.patch"
+  "openroad_patch": "environments/modules/openroad-arm64.patch",
+  "openroad_version": "f131605 plus recorded LEF/DEF ARM64 patch"
 }

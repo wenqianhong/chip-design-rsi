@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "exit_code": 0,
+  "violations": 0,
+  "categories": {},
+  "command": [
+    "klayout",
+    "-b",
+    "-r",
+    "/home/wenqianhong.guest/chipbench-modules/orfs/flow/platforms/nangate45/drc/FreePDK45.lydrc",
+    "-rd",
+    "in_gds=/home/wenqianhong.guest/chipbench-modules/results/physical/gcd.gds",
+    "-rd",
+    "report_file=/home/wenqianhong.guest/chipbench-modules/results/physical/gcd.lyrdb"
+  ],
+  "elapsed_seconds": 7.998,
+  "scope": "Upstream educational FreePDK45 rule deck; not foundry signoff"
+}

@@ -23,4 +23,8 @@ categories=Counter(i.findtext('category','') for i in ET.parse(report).findall('
 row=dict(status='passed' if p.returncode==0 and report.exists() and not categories else 'failed',exit_code=p.returncode,violations=sum(categories.values()),categories=categories,command=args,elapsed_seconds=round(time.monotonic()-start,3),scope='Upstream educational FreePDK45 rule deck; not foundry signoff')
 (root/'results/layout-results.json').write_text(json.dumps(row,indent=2))
 print(json.dumps(row,indent=2))
+if row['status']=='passed':
+ with (out/'render.log').open('w') as log:
+  rendered=run(['klayout','-b','-r',str(root/'render_layout.py')],stdout=log,stderr=subprocess.STDOUT,timeout=120)
+ if rendered.returncode:raise RuntimeError('DRC passed, but layout rendering failed')
 raise SystemExit(0 if row['status']=='passed' else 1)
