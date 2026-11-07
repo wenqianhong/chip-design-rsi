@@ -18,9 +18,15 @@ source = root / "orfs/tools/OpenROAD"
 exe = root / "tools/bin/openroad"
 args = [str(exe), "-exit", "-no_init", "-threads", "4", "-metrics", str(out / "metrics.json"), str(root / "physical.tcl")]
 start = time.monotonic()
-with (out / "flow.log").open("w") as log:
-    proc = run(args, cwd=source / "test", env={**os.environ, "RESULTS_DIR":str(out)},
-                          stdout=log, stderr=subprocess.STDOUT, timeout=900)
+try:
+    with (out / "flow.log").open("w") as log:
+        proc = run(args, cwd=source / "test", env={**os.environ, "RESULTS_DIR":str(out)},
+                   stdout=log, stderr=subprocess.STDOUT, timeout=900)
+except (subprocess.TimeoutExpired, OSError) as exc:
+    row = dict(status="timeout" if isinstance(exc, subprocess.TimeoutExpired) else "infra_error",
+               command=args, error=str(exc), elapsed_seconds=round(time.monotonic()-start,3))
+    (root / "results/physical-results.json").write_text(json.dumps(row, indent=2))
+    raise SystemExit(1)
 text = (out / "flow.log").read_text(errors="replace")
 values = dict(re.findall(r"^MODULE_(\w+)\s+(\S+)", text, re.M))
 checks = {
